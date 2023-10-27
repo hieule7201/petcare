@@ -1,0 +1,170 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    outline: none;
+    list-style: none;
+    text-decoration: none;
+}
+
+:root {
+    --color-soft-primary: #84D187;
+    --color-primary: #00B207;
+    --color-hard-primary: #2C742F;
+    --color-warning: #FF8A00;
+    --color-danger: #EA4B48;
+    --color-white: #ffffff;
+    --color-bg: #E5E5E5;
+    --gray-0: #F2F2F2;
+    --gray-1: #E6E6E6;
+    --gray-2: #CCCCCC;
+    --gray-3: #B3B3B3;
+    --gray-4: #999999;
+    --gray-5: #808080;
+    --gray-6: #666666;
+    --gray-7: #4D4D4D;
+    --gray-8: #333333;
+    --gray-9: #1A1A1A;
+    --green-0: #EDF2EE;
+    --green-1: #DAE5DA;
+    --green-2: #B4CCB4;
+    --green-3: #96B297;
+    --green-4: #7A997C;
+    --green-5: #618062;
+    --green-6: #406B42;
+    --green-7: #2B572E;
+    --green-8: #173B1A;
+    --green-9: #002603;
+
+    --transition: all 500ms ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow: auto;
+    color: var(--gray-9);
+    background: var(--color-white);
+    position: relative;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent;
+    width: 0;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    background-clip: content-box;
+}
+
+.container {
+    max-width: 1920;
+    margin-inline: auto;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2.5rem;
+}
+
+h4 {
+    font-size: 2.25rem;
+}
+
+h5 {
+    font-size: 2rem;
+}
+
+a {
+    color: var(--gray-4);
+}
+
+img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+}
+
+
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+
+@media (max-width: 1920px) {
+    .container {
+        max-width: 1536px;
+    }
+}
+
+@media (max-width: 1536px) {
+    .container {
+        max-width: 1280px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .container {
+        max-width: 1024px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 640px;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        max-width: 475px;
+    }
+}
+
+
+@media (max-width: 475px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* sm */
+
+/* md */
+
+/* lg */
+
+/* xl */
+
+/* 2xl */

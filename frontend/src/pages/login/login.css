@@ -1,0 +1,112 @@
+.login-container {
+    margin-top: 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 1.5rem 2rem 1.5rem;
+    gap: 1.25rem;
+    border-radius: .5rem;
+    border: 1px solid var(--gray-0);
+    box-shadow: 0 0 3.5rem 0 rgba(0, 38, 3, .08);
+}
+
+.login-title {
+    color: var(--gray-9);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+}
+
+.login-form input[type='email'],
+input[type='password'] {
+    display: flex;
+    padding: .875rem 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: .375rem;
+    border: 1px solid var(--gray-1);
+    background: var(--color-white);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 120%;
+    width: 26rem;
+}
+
+.login-eye {
+    position: absolute;
+    bottom: .95rem;
+    right: 1rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.login-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-remember {
+    display: flex;
+    gap: 0.38rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-remember input[type='checkbox'] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--color-hard-primary);
+}
+
+.login-remember label,
+.login-forget,
+.login-change_register p {
+    font-size: .875rem;
+    color: var(--gray-6);
+    font-weight: 400;
+    line-height: 150%;
+}
+
+
+.login-btn {
+    width: 100%;
+    padding: .88rem 2rem;
+    border-radius: .375rem;
+    background: var(--color-hard-primary);
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.login-change_register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.38rem;
+}
+
+.login-change_register a {
+    color: var(--gray-9);
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 150%;
+}
