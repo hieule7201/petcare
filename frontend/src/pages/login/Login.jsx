@@ -1,32 +1,17 @@
 import { NavLink } from "react-router-dom";
 import "./login.css";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import InputForm from "../../UI/InputForm";
+import InputPassword from "../../UI/InputPassword";
+import PrimaryButton from "../../UI/PrimaryButton";
 
 const Login = () => {
-  const [eye, setEye] = useState(true);
   return (
     <div className="container login-container">
-      <form action="" method="POST" className="login-form">
+      <InputForm action="" method="POST">
         <h5 className="login-title">Login</h5>
         <div className="login-field">
           <input type="email" name="email" placeholder="Email" />
-          <input type="password" name="password" placeholder="Password" />
-          {eye ? (
-            <AiOutlineEye
-              className="login-eye"
-              onClick={() => {
-                setEye((eye) => !eye);
-              }}
-            />
-          ) : (
-            <AiOutlineEyeInvisible
-              className="login-eye"
-              onClick={() => {
-                setEye((eye) => !eye);
-              }}
-            />
-          )}
+          <InputPassword placeholder="password" />
         </div>
         <div className="login-links">
           <div className="login-remember">
@@ -35,14 +20,12 @@ const Login = () => {
           </div>
           <p className="login-forget">Forget Password</p>
         </div>
-        <button type="submit" className="login-btn">
-          Login
-        </button>
+        <PrimaryButton type="submit" title="Login" />
         <div className="login-change_register">
           <p>Don't have account?</p>
           <NavLink to="/register">Register</NavLink>
         </div>
-      </form>
+      </InputForm>
     </div>
   );
 };

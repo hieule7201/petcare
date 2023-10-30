@@ -1,6 +1,6 @@
 import "./navbar.css";
 import { links } from "../data";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/img/pawprint.png";
 import { BiSearch, BiSolidUser, BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
@@ -10,10 +10,10 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="container navbar-container">
-        <div className="navbar-logo">
+        <Link to="/" className="navbar-logo">
           <img src={Logo} alt="" />
           <h3 className="logo">Petty</h3>
-        </div>
+        </Link>
         <div className={`navbar-links ${showNav ? "showNav" : "hideNav"}`}>
           <AiOutlineClose className="close" onClick={() => setShowNav(false)} />
           {links.map(({ name, path }, index) => {

@@ -1,26 +1,17 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-require('dotenv').config()
+const express = require("express");
+const app = express();
+const cors = require("cors");
+require("dotenv").config();
+const userRoute = require("./routes/user.route.js");
+const connectMongo = require("./db/database.js");
 
-app.use(cors())
+app.use(express.json());
+app.use(cors());
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 5000
+app.use("/", userRoute);
 
-app.get('/',(req, res, next)=>{
-    res.send([
-        {
-            name: 'hieu',
-            value:'1'
-        },
-        {
-            name: 'kaka',
-            value: '2'
-        }
-
-    ])
-})
-
-app.listen(PORT, ()=>{
-    console.log(`${PORT} is running...`)
-})
+app.listen(PORT, async () => {
+  connectMongo();
+  console.log(`${PORT} is running...`);
+});

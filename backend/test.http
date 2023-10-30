@@ -1,1 +1,1 @@
-GET http://localhost:8081/
+POST  http://localhost:8081/user/register
