@@ -1,19 +1,16 @@
-const { body } = require("express-validator");
-const userService = require("../service/user.service.js");
-const HttpStatus = require("../helper/HttpStatus.js");
+import userService from "../service/user.service.js";
+import HttpStatus from "http-status-codes";
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
     const user = await userService.register({ name, email, password });
     res.status(HttpStatus.OK).json({
       message: "register successfully",
     });
-  } catch (exception) {
-    res
-      .status(HttpStatus.INTERNAL_SERVER_ERROR)
-      .json({ message: exception.toString() });
+  } catch (e) {
+    next(e);
   }
 };
 
-module.exports = { register };
+export default { register };

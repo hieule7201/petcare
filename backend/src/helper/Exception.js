@@ -1,9 +1,13 @@
-module.exports = class Exception extends Error {
+export default class Exception extends Error {
   static CANNOT_CONNECT_MONGO = "Cannot connect to Mongo";
   static CANNOT_REGISTER_USER = "cannot register user";
   static USER_EXIST = "user already";
-  constructor(message) {
+  constructor(statusCode, message) {
     super(message);
-    console.log(message);
+    this.name = "Exception";
+
+    this.statusCode = statusCode;
+
+    Error.captureStackTrace(this, this.constructor);
   }
-};
+}
