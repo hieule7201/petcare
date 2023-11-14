@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
 import "./login.css";
 import InputForm from "../../UI/InputForm";
-import InputPassword from "../../UI/InputPassword";
 import PrimaryButton from "../../UI/PrimaryButton";
 
 const Login = () => {
   return (
     <div className="container login-container">
-      <InputForm action="" method="POST">
+      {/* <InputForm action="" method="POST">
         <h5 className="login-title">Login</h5>
         <div className="login-field">
           <input type="email" name="email" placeholder="Email" />
@@ -25,7 +24,7 @@ const Login = () => {
           <p>Don't have account?</p>
           <NavLink to="/register">Register</NavLink>
         </div>
-      </InputForm>
+      </InputForm> */}
     </div>
   );
 };

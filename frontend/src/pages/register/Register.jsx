@@ -1,63 +1,136 @@
 import { NavLink } from "react-router-dom";
 import InputForm from "../../UI/InputForm";
-import InputPassword from "../../UI/InputPassword";
+import { useForm } from "react-hook-form";
 import PrimaryButton from "../../UI/PrimaryButton";
 import "./register.css";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
 import { useState } from "react";
 import axios from "axios";
 
+const Schema = Joi.object({
+  name: Joi.string().required().min(5).max(50).label("Name"),
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .label("Email"),
+  password: Joi.string().required().min(8).max(50).label("Password"),
+  confirm_password: Joi.any()
+    .equal(Joi.ref("password"))
+    .required()
+    .label("Confirm password")
+    .messages({ "any.only": "{{#label}} does not match" }),
+});
+
 const Register = () => {
-  const [message, setMessage] = useState("");
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: joiResolver(Schema),
   });
-  const [confirm, setConfirm] = useState("");
-  const handleInput = (e) => {
-    setValues({ ...values, [e.target.name]: [e.target.value] });
-  };
-  const handleSubmit = (e) => {
-    if (values.password.toString().trim === confirm.toString().trim) {
-      console.log("ok");
-    }
-    e.preventDefault();
-    axios
-      .post("http://localhost:8081/register", values)
-      .then((res) => setMessage("successfully"))
+
+  const onSubmit = async (data) => {
+    const newData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+    console.log(newData);
+    await axios
+      .post("http://localhost:8081/register", newData)
+      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
   return (
     <div className="container register-container">
-      <p>{message}</p>
-      <InputForm action="/register" method="POST" onSubmit={handleSubmit}>
+      <InputForm
+        action="/register"
+        method="POST"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h5 className="register-title">Create Account</h5>
         <div className="register-field">
           <input
             type="text"
             name="name"
             placeholder="Name"
-            onChange={handleInput}
+            {...register("name")}
           />
+          {errors.name && (
+            <p className="register_validate">{errors.name.message}</p>
+          )}
           <input
-            type="email"
+            type="text"
             name="email"
             placeholder="Email"
-            onChange={handleInput}
+            {...register("email")}
           />
+          {errors.email && (
+            <p className="register_validate">{errors.email.message}</p>
+          )}
 
-          <InputPassword
-            name="password"
-            placeholder="password"
-            onChange={handleInput}
-          />
-          <InputPassword
-            placeholder="confirm password"
-            name="confirm_password"
-            onChange={(e) => {
-              setConfirm(e.target.value);
-            }}
-          />
+          <div className="input-password">
+            <input
+              type={`${showPassword ? "text" : "password"}`}
+              placeholder="Password"
+              name="password"
+              {...register("password")}
+            />
+            {showPassword ? (
+              <AiOutlineEyeInvisible
+                className="eye-icon"
+                onClick={() => {
+                  setShowPassword((showPassword) => !showPassword);
+                }}
+              />
+            ) : (
+              <AiOutlineEye
+                className="eye-icon"
+                onClick={() => {
+                  setShowPassword((showPassword) => !showPassword);
+                }}
+              />
+            )}
+          </div>
+          {errors.password && (
+            <p className="register_validate">{errors.password.message}</p>
+          )}
+
+          <div className="input-password">
+            <input
+              type={`${showPassword2 ? "text" : "password"}`}
+              placeholder="Confirm Password"
+              name="confirm_password"
+              {...register("confirm_password")}
+            />
+            {errors.confirm_password && (
+              <p className="register_validate">
+                {errors.confirm_password.message}
+              </p>
+            )}
+
+            {showPassword2 ? (
+              <AiOutlineEyeInvisible
+                className="eye-icon"
+                onClick={() => {
+                  setShowPassword2((showPassword) => !showPassword);
+                }}
+              />
+            ) : (
+              <AiOutlineEye
+                className="eye-icon"
+                onClick={() => {
+                  setShowPassword2((showPassword) => !showPassword);
+                }}
+              />
+            )}
+          </div>
         </div>
         <div className="register-accept">
           <input type="checkbox" name="accept" />
