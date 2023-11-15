@@ -12,5 +12,16 @@ const register = async (req, res, next) => {
     next(e);
   }
 };
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const userLogin = await userService.login({ email, password });
+    res
+      .status(HttpStatus.OK)
+      .json({ message: "login successfully", data: userLogin });
+  } catch (error) {
+    next(error);
+  }
+};
 
-export default { register };
+export default { register, login };

@@ -49,11 +49,7 @@ const Register = () => {
   };
   return (
     <div className="container register-container">
-      <InputForm
-        action="/register"
-        method="POST"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <InputForm method="POST" onSubmit={handleSubmit(onSubmit)}>
         <h5 className="register-title">Create Account</h5>
         <div className="register-field">
           <input
@@ -137,7 +133,7 @@ const Register = () => {
           <label htmlFor="accept">Accept All terms & Conditions</label>
         </div>
 
-        <PrimaryButton title="Login" type="submit" />
+        <PrimaryButton title="Register" type="submit" />
         <div className="register-change_login">
           <p>Already have account?</p>
           <NavLink to="/login">Login</NavLink>
