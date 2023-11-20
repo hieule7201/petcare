@@ -1,7 +1,14 @@
+import Banner from "../../components/Banner";
+import Service from "../../components/Services";
 import "./home.css";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <Banner />
+      <Service />
+    </>
+  );
 };
 
 export default Home;
