@@ -35,13 +35,11 @@ const login = async ({ email, password }) => {
     if (!isMatch) {
       throw new Exception(HttpStatus.BAD_REQUEST, Exception.WRONG_PASSWORD);
     }
-    const token = jwt.sign({ data: existingUser }, process.env.JWT_SECRET, {
-      expiresIn: "10 days",
+    const token = jwt.sign({ id: existingUser.id }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES,
     });
-
+    console.log(existingUser.id);
     return {
-      ...existingUser.toObject(),
-      password: "not show",
       token: token,
     };
   } catch (error) {

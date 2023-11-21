@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import InputForm from "../../UI/InputForm";
 import { useForm } from "react-hook-form";
 import PrimaryButton from "../../UI/PrimaryButton";
@@ -8,7 +8,8 @@ import Joi from "joi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 import { useState } from "react";
-import axios from "axios";
+import { user_register } from "../../api/user";
+import { toast } from "react-toastify";
 
 const Schema = Joi.object({
   name: Joi.string().required().min(5).max(50).label("Name"),
@@ -25,6 +26,7 @@ const Schema = Joi.object({
 });
 
 const Register = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const {
@@ -41,11 +43,14 @@ const Register = () => {
       email: data.email,
       password: data.password,
     };
-    console.log(newData);
-    await axios
-      .post("http://localhost:8081/register", newData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    try {
+      const res = await user_register(newData);
+
+      toast.success(res.data.message);
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <div className="container register-container">

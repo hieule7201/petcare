@@ -10,6 +10,6 @@ const errorHandle = (err, req, res, next) => {
     stack: err.stack,
   };
   res.status(responseError.statusCode).json(responseError);
-  console.log(responseError.message);
+  console.log(responseError.stack);
 };
 export default errorHandle;

@@ -5,7 +5,9 @@ import Logo from "../assets/img/pawprint.png";
 import { BiSearch, BiSolidUser, BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const user = useSelector((state) => state.auth.login.currentUser);
   const [showNav, setShowNav] = useState(false);
   return (
     <div className="navbar">
@@ -37,10 +39,17 @@ const Navbar = () => {
           </div>
           <div className="user-icon">
             <BiSolidUser />
-            <div className="navbar-subnav_login">
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/register">Register</NavLink>
-            </div>
+            {user ? (
+              <div className="navbar-subnav_login">
+                <NavLink to="/your_info">Information</NavLink>
+                <NavLink to="/logout">Log out</NavLink>
+              </div>
+            ) : (
+              <div className="navbar-subnav_login">
+                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/register">Register</NavLink>
+              </div>
+            )}
           </div>
           <div className="menu-icon">
             <BiMenu

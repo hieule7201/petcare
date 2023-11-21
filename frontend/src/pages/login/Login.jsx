@@ -7,7 +7,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
-import axios from "axios";
+import { user_login } from "../../api/user";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { loginFail, loginStart, loginSuccess } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const Schema = Joi.object({
   email: Joi.string()
@@ -17,6 +21,8 @@ const Schema = Joi.object({
   password: Joi.string().required().label("Password"),
 });
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -26,14 +32,22 @@ const Login = () => {
   } = useForm({ resolver: joiResolver(Schema) });
 
   const onSubmit = async (data) => {
-    await axios
-      .post("http://localhost:8081/login", data)
-      .then((res) => {
-        console.log(res.data);
-        alert("login successfully");
-        window.location = "/";
-      })
-      .catch((err) => alert("Password or Email is Wrong"));
+    dispatch(loginStart());
+    try {
+      const res = await user_login({
+        email: data.email,
+        password: data.password,
+      });
+      dispatch(loginSuccess(res.data.data));
+      console.log(res.data.message);
+      toast.success(res.data.message);
+
+      navigate("/");
+    } catch (error) {
+      dispatch(loginFail());
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    }
   };
 
   return (

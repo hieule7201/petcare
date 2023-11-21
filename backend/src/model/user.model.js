@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
     },
     _isDestroy: {
       type: Boolean,
-      default: 1,
+      default: 0,
     },
     avatar: {
       public_id: {
