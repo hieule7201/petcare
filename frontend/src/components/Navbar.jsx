@@ -7,8 +7,9 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 const Navbar = () => {
-  const user = useSelector((state) => state.auth.login.currentUser);
+  const { isAuthenticated, user } = useSelector((state) => state.auth.login);
   const [showNav, setShowNav] = useState(false);
+  console.log(isAuthenticated);
   return (
     <div className="navbar">
       <div className="container navbar-container">
@@ -39,7 +40,7 @@ const Navbar = () => {
           </div>
           <div className="user-icon">
             <BiSolidUser />
-            {user ? (
+            {isAuthenticated ? (
               <div className="navbar-subnav_login">
                 <NavLink to="/your_info">Information</NavLink>
                 <NavLink to="/logout">Log out</NavLink>

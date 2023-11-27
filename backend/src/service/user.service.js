@@ -46,5 +46,16 @@ const login = async ({ email, password }) => {
     throw error;
   }
 };
+const get_user = async (id) => {
+  try {
+    const user = await userSchema.findById(id);
+    if (!user) {
+      return new Exception(HttpStatus.BAD_REQUEST, Exception.USER_EXIST);
+    }
+    return user;
+  } catch (error) {
+    return error;
+  }
+};
 
-export default { register, login };
+export default { register, login, get_user };

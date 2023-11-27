@@ -6,8 +6,27 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
+import { get_user } from "./api/user";
+import { loginFail, loginStart, loginSuccess } from "../src/redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        dispatch(loginStart());
+        const res = await get_user();
+        dispatch(loginSuccess(res.data));
+        // console.log(res.data);
+      } catch (error) {
+        dispatch(loginFail());
+        console.log(error.response.data.message);
+      }
+    };
+    loadUser();
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Navbar />

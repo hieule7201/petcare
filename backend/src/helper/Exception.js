@@ -4,6 +4,7 @@ export default class Exception extends Error {
   static USER_EXIST = "user already";
   static WRONG_EMAIL = "wrong email";
   static WRONG_PASSWORD = "wrong password";
+  static LOGIN_AGAIN = "please login to continue";
   constructor(statusCode, message) {
     super(message);
     this.name = "Exception";

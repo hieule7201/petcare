@@ -1,5 +1,7 @@
 import userService from "../service/user.service.js";
 import HttpStatus from "http-status-codes";
+import jwt from "jsonwebtoken";
+import Exception from "../helper/Exception.js";
 const options = {
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
   HttpOnly: true,
@@ -33,5 +35,17 @@ const login = async (req, res, next) => {
     next(error);
   }
 };
+const get_user = async (req, res, next) => {
+  try {
+    const id = req.user._conditions._id;
 
-export default { register, login };
+    const user = await userService.get_user(id);
+
+    res
+      .status(HttpStatus.OK)
+      .json({ message: "get user successfully", data: user });
+  } catch (error) {
+    next(error);
+  }
+};
+export default { register, login, get_user };

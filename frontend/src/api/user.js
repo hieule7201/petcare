@@ -7,5 +7,7 @@ const user_register = (user) => {
 const user_login = (user) => {
   return instance.post("/login", user, { withCredentials: true });
 };
-
-export { user_register, user_login };
+const get_user = async () => {
+  return await instance.get("/get_user", { withCredentials: true });
+};
+export { user_register, user_login, get_user };

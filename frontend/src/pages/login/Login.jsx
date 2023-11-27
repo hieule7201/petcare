@@ -10,8 +10,8 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import { user_login } from "../../api/user";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginFail, loginStart, loginSuccess } from "../../redux/authSlice";
 import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/authSlice";
 
 const Schema = Joi.object({
   email: Joi.string()
@@ -32,19 +32,18 @@ const Login = () => {
   } = useForm({ resolver: joiResolver(Schema) });
 
   const onSubmit = async (data) => {
-    dispatch(loginStart());
     try {
       const res = await user_login({
         email: data.email,
         password: data.password,
       });
-      dispatch(loginSuccess(res.data.data));
+      dispatch(loginSuccess());
+
       console.log(res.data.message);
       toast.success(res.data.message);
 
       navigate("/");
     } catch (error) {
-      dispatch(loginFail());
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }
