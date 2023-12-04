@@ -8,25 +8,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { get_user } from "./api/user";
-import { loginFail, loginStart, loginSuccess } from "../src/redux/authSlice";
+import { loginStart, loginSuccess } from "../src/redux/authSlice";
 import { useDispatch } from "react-redux";
+import ServiceDetail from "./pages/ServiceDetail/ServiceDetail";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    const loadUser = async () => {
-      try {
-        dispatch(loginStart());
-        const res = await get_user();
-        dispatch(loginSuccess(res.data));
-        // console.log(res.data);
-      } catch (error) {
-        dispatch(loginFail());
-        console.log(error.response.data.message);
-      }
-    };
     loadUser();
-  }, [dispatch]);
+  }, []);
+  const loadUser = async () => {
+    try {
+      dispatch(loginStart());
+      const res = await get_user();
+      dispatch(loginSuccess(res.data));
+      // console.log(res.data);
+    } catch (error) {
+      // dispatch(loginFail());
+      console.log(error.response?.data.message);
+    }
+  };
   return (
     <BrowserRouter>
       <Navbar />
@@ -34,6 +35,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/service/:id" element={<ServiceDetail />} />
       </Routes>
       <Footer />
       <ToastContainer

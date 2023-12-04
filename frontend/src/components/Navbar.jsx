@@ -7,7 +7,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 const Navbar = () => {
-  const { isAuthenticated, user } = useSelector((state) => state.auth.login);
+  const { isAuthenticated } = useSelector((state) => state.auth.login);
   const [showNav, setShowNav] = useState(false);
   console.log(isAuthenticated);
   return (

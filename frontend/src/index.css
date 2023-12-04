@@ -43,7 +43,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
     overflow: auto;
     color: var(--gray-9);
     background: var(--color-white);

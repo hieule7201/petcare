@@ -76,11 +76,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     gap: 1rem;
 }
 
 .services-card_name {
-    color: var(--color-hard-primary)
+    color: var(--color-hard-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .services-card_short_desc {
