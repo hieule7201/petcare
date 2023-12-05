@@ -2,7 +2,7 @@ import "./navbar.css";
 import { links } from "../data";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../assets/img/pawprint.png";
-import { BiSearch, BiSolidUser, BiMenu } from "react-icons/bi";
+import { BiSearch, BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -38,20 +38,7 @@ const Navbar = () => {
           <div className="search-icon">
             <BiSearch />
           </div>
-          <div className="user-icon">
-            <BiSolidUser />
-            {isAuthenticated ? (
-              <div className="navbar-subnav_login">
-                <NavLink to="/your_info">Information</NavLink>
-                <NavLink to="/logout">Log out</NavLink>
-              </div>
-            ) : (
-              <div className="navbar-subnav_login">
-                <NavLink to="/login">Login</NavLink>
-                <NavLink to="/register">Register</NavLink>
-              </div>
-            )}
-          </div>
+
           <div className="menu-icon">
             <BiMenu
               onClick={() => {
