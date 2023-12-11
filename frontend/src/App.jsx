@@ -11,6 +11,12 @@ import { get_user } from "./api/user";
 import { loginStart, loginSuccess } from "../src/redux/authSlice";
 import { useDispatch } from "react-redux";
 import ServiceDetail from "./pages/ServiceDetail/ServiceDetail";
+import ShopHome from "./pages/Shop/ShopHome";
+import OrderDetail from "./pages/Shop/OrderDetail";
+import OrderInfo from "./pages/Shop/OrderInfo";
+import CusOrder from "./pages/Shop/CusOrder";
+import CusInfo from "./pages/Shop/CusInfo";
+import StaffSetting from "./pages/Shop/StaffSetting";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,12 +36,20 @@ const App = () => {
   };
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/service/:id" element={<ServiceDetail />} />
+
+        {/* SHOP */}
+        <Route path="/shop" element={<ShopHome />} />
+        <Route path="/order_info" element={<OrderInfo />} />
+        <Route path="/cus_order" element={<CusOrder />} />
+        <Route path="/cus_info" element={<CusInfo />} />
+        <Route path="/staff_setting" element={<StaffSetting />} />
+
+        <Route path="/shop/:id" element={<OrderDetail />} />
       </Routes>
       <Footer />
       <ToastContainer

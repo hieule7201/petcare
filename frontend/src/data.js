@@ -35,7 +35,7 @@ export const service_lists = [
   {
     id: "1",
     name: "Cắt tỉa lông, tạo kiểu",
-    img: "",
+    img: "https://mcdn.coolmate.me/uploads/November2021/spa-thu-cung-la-gi-26.jpg",
     short_desc: "Cắt tỉa lông giúp thú cưng bạn khỏe mạnh và xinh đẹp hơn",
   },
   {

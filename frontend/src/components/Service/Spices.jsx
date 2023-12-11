@@ -1,5 +1,5 @@
 import React from "react";
-import { spices } from "../data";
+import { spices } from "../../data";
 
 const Spices = ({ data, setData }) => {
   return (

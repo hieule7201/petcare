@@ -1,6 +1,6 @@
 import React from "react";
-import { service_lists } from "../data";
-import img_card_default from "../assets/img/service_default.jpg";
+import { service_lists } from "../../data";
+import img_card_default from "../../assets/img/service_default.jpg";
 import { useNavigate } from "react-router-dom";
 
 const Services = () => {

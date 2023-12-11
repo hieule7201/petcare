@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import { Navigation, Pagination } from "swiper/modules";
-import { banner_pet } from "../data";
+import { banner_pet } from "../../data";
 const Banner = () => {
   return (
     <div className="banner">

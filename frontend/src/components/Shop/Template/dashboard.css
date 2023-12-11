@@ -1,0 +1,62 @@
+.dashboard_header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: white;
+}
+
+.d_header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--color-hard-primary);
+}
+
+.navbar-logo .logo {
+    line-height: 150%;
+}
+
+.d_user_icon {
+    font-size: 1.5rem;
+    color: var(--color-hard-primary);
+}
+
+.box-user {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    width: 10rem;
+}
+
+.box-user:hover,
+.box-user:hover .box-logout {
+    display: flex;
+    cursor: pointer;
+}
+
+.box-logout {
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+    background-color: var(--color-hard-primary);
+    width: 100%;
+    padding: .5rem 1rem;
+    justify-content: center;
+    display: none;
+}
+
+.box-logout a {
+    font-size: 1rem;
+    color: var(--color-white);
+}

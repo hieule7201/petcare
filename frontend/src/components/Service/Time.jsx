@@ -1,13 +1,14 @@
 import React from "react";
-import { time_come } from "../data";
+import { time_come } from "../../data";
 
 const Time = ({ data, setData }) => {
   return (
-    <div className="time_come">
+    <div className="choose-box">
       {time_come.map((props) => {
         return (
-          <label key={props.id}>
+          <div key={props.id} className="box-input">
             <input
+              className="radio-custom"
               type="radio"
               name="time"
               id={props.id}
@@ -15,8 +16,10 @@ const Time = ({ data, setData }) => {
                 setData({ ...data, time_come: props.value });
               }}
             />
-            {props.value}
-          </label>
+            <label className="label" htmlFor={props.id}>
+              {props.value}
+            </label>
+          </div>
         );
       })}
     </div>

@@ -112,6 +112,15 @@ body {
 
 
 
+/* TABLE */
+.table-box {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 
 
 
