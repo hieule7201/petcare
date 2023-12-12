@@ -1,0 +1,18 @@
+.service {
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.box-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.service-header {
+    color: var(--color-white);
+}

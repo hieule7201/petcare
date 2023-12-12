@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Spices from "../../components/Service/Spices";
-import Weight from "../../components/Service/Weight";
-import Long from "../../components/Service/Long";
-import Time from "../../components/Service/Time";
-import FormBooking from "../../components/Service/FormBooking";
+import Weight from "../../components/ServiceDetail/Weight";
+import Long from "../../components/ServiceDetail/Long";
+import Time from "../../components/ServiceDetail/Time";
+import FormBooking from "../../components/ServiceDetail/FormBooking";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
+import PrimaryButton from "../../UI/PrimaryButton";
+import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 
 const OrderDetail = () => {
   const location = useLocation();
@@ -25,56 +26,57 @@ const OrderDetail = () => {
   });
   return (
     <>
-      <DashboardSlide active={1} />
-      <div className="container detail-container">
-        <div className="detail-right">
-          <img
-            src="https://mcdn.coolmate.me/uploads/November2021/spa-thu-cung-la-gi-26.jpg"
-            alt=""
-          />
-        </div>
+      <DashboardHeader />
+      <div className="container shop_container">
+        <DashboardSlide active={1} />
+        <div className="order-detail-container">
+          <div className="staff-order-detail">
+            <h5>{location.state.name}</h5>
 
-        <div className="detail-left">
-          <h5>{location.state.name}</h5>
-          <Spices data={data} setData={setData} />
-          {location.state && location.state.id !== "2" ? (
-            <Weight setData={setData} data={data} />
-          ) : (
-            <Long setData={setData} data={data} />
-          )}
-          <Time setData={setData} data={data} />
-          {location.state && location.state.id === "5" ? (
-            <div className="time_come">
-              <input
-                type="date"
-                onChange={(e) => {
-                  setData({ ...data, date_come: e.target.value });
-                }}
-              />
-              <input
-                type="date"
-                onChange={(e) => {
-                  setData({ ...data, date_end: e.target.value });
-                }}
-              />
-            </div>
-          ) : (
-            <div className="time_come">
-              <input
-                type="date"
-                onChange={(e) => {
-                  setData({ ...data, date_come: e.target.value });
-                }}
-              />
-            </div>
-          )}
+            {location.state && location.state.id !== "2" ? (
+              <Weight setData={setData} data={data} />
+            ) : (
+              <Long setData={setData} data={data} />
+            )}
+            <Time setData={setData} data={data} />
 
-          <div className="form-booking">
+            <div className="box-date">
+              <div className="box-date">
+                <p>from</p>
+                <input
+                  type="date"
+                  min={new Date().toISOString().split("T")[0]}
+                  className="input-date"
+                  onChange={(e) => {
+                    setData({ ...data, date_come: e.target.value });
+                  }}
+                />
+              </div>
+              {location.state && location.state.id === "5" ? (
+                <div className="box-date">
+                  to
+                  <input
+                    type="date"
+                    className="input-date"
+                    placeholder="dd-mm-yyyy"
+                    min={new Date().toISOString().split("T")[0]}
+                    onChange={(e) => {
+                      setData({ ...data, date_end: e.target.value });
+                    }}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+
             <FormBooking setData={setData} data={data} />
+            {data.price ? data.price : ""}
+            {console.log(data)}
+            <div className="box-button" style={{ marginBottom: "10px" }}>
+              <PrimaryButton title="Submit" />
+            </div>
           </div>
-          {data.price ? data.price : ""}
-          {console.log(data)}
-          <button>Submit</button>
         </div>
       </div>
     </>

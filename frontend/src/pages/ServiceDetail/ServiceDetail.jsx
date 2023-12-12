@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import FormBooking from "../../components/Service/FormBooking";
+import FormBooking from "../../components/ServiceDetail/FormBooking";
 import { useLocation } from "react-router-dom";
-import Long from "../../components/Service/Long";
-import Weight from "../../components/Service/Weight";
-import Time from "../../components/Service/Time";
+import Long from "../../components/ServiceDetail/Long";
+import Weight from "../../components/ServiceDetail/Weight";
+import Time from "../../components/ServiceDetail/Time";
 import Navbar from "../../components/Navbar";
 import "./serviceDetail.css";
 import PrimaryButton from "../../UI/PrimaryButton";
+import Footer from "../../components/Footer";
 
 const ServiceDetail = () => {
   const location = useLocation();
@@ -85,6 +86,8 @@ const ServiceDetail = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };

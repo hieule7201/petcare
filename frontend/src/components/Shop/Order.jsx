@@ -14,15 +14,15 @@ const Order = () => {
               onClick={() => {
                 navigate(`/shop/${id}`, { state: service_lists[index] });
               }}
-              className="order-card"
+              className="card"
               key={id}
             >
-              <div className="order-card_img">
+              <div className="card_img">
                 <img src={img ? img : img_card_default} alt="" />
               </div>
-              <div className="order-card_info">
-                <span className="order-card_name">{name}</span>
-                <p className="order-card_short_desc">
+              <div className="card_info">
+                <span className="card_name">{name}</span>
+                <p className="card_short_desc">
                   {short_desc.length > 60
                     ? short_desc.slice(0, 60) + "..."
                     : short_desc}

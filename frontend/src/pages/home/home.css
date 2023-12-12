@@ -48,7 +48,7 @@
     grid-gap: 2rem;
 }
 
-.services-card {
+.card {
     overflow: hidden;
     border-radius: .5rem;
     padding: 1rem;
@@ -60,7 +60,7 @@
     max-width: 20rem;
 }
 
-.services-card_img {
+.card_img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,14 +68,14 @@
     width: 100%;
 }
 
-.services-card_img img {
+.card_img img {
     border-radius: 50%;
     width: 6rem;
     height: 6rem;
 
 }
 
-.services-card_info {
+.card_info {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,7 +84,7 @@
     gap: 1rem;
 }
 
-.services-card_name {
+.card_name {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-hard-primary);
@@ -94,10 +94,10 @@
     overflow: hidden;
 }
 
-.services-card_short_desc {
+.card_short_desc {
     text-align: center;
 }
 
-.services-card:hover img {
+.card:hover img {
     transform: scale(1.1);
 }

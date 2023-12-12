@@ -9,7 +9,7 @@ const DashboardHeader = () => {
     <>
       <div className="dashboard_header">
         <div className="container d_header-container">
-          <Link to="/" className="navbar-logo">
+          <Link to="/shop" className="navbar-logo">
             <img src={Logo} alt="" />
             <h3 className="logo">Petty</h3>
           </Link>

@@ -1,5 +1,6 @@
+// import { viVN } from "@mui/material/locale";
 import { service_lists } from "../data";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, viVN } from "@mui/x-data-grid";
 
 const Table = () => {
   const column = [
@@ -26,6 +27,11 @@ const Table = () => {
   return (
     <div className="table-box">
       <DataGrid
+        localeText={viVN.components.MuiDataGrid.defaultProps.localeText}
+        slots={{ toolbar: GridToolbar }}
+        slotProps={{
+          toolbar: { csvOptions: { allColumns: true, utf8WithBom: true } },
+        }}
         rows={row}
         columns={column}
         disableSelectionOnClick
