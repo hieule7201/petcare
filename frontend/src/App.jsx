@@ -17,11 +17,13 @@ import CusInfo from "./pages/Shop/CusInfo";
 import StaffSetting from "./pages/Shop/StaffSetting";
 import Service from "./pages/service/Service";
 import About from "./pages/About/About";
+import { getAllService } from "./redux/actions/service";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    loadUser();
+    // loadUser();
+    dispatch(getAllService());
   }, []);
   const loadUser = async () => {
     try {
