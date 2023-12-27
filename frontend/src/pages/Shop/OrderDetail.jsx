@@ -7,12 +7,15 @@ import FormBooking from "../../components/ServiceDetail/FormBooking";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
 import PrimaryButton from "../../UI/PrimaryButton";
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { viVN } from "@mui/x-date-pickers/locales";
 
 const OrderDetail = () => {
   const location = useLocation();
   const [data, setData] = useState({
-    nameService: location.state.name,
-    spices: "",
+    idService: location.state._id,
+    deliver: "",
     style_long: "",
     weight: "",
     time_come: "",
@@ -33,7 +36,8 @@ const OrderDetail = () => {
           <div className="staff-order-detail">
             <h5>{location.state.name}</h5>
 
-            {location.state && location.state.id !== "2" ? (
+            {location.state &&
+            location.state._id !== "6580473510a908b128352912" ? (
               <Weight setData={setData} data={data} />
             ) : (
               <Long setData={setData} data={data} />
@@ -43,27 +47,49 @@ const OrderDetail = () => {
             <div className="box-date">
               <div className="box-date">
                 <p>from</p>
-                <input
-                  type="date"
-                  min={new Date().toISOString().split("T")[0]}
-                  className="input-date"
-                  onChange={(e) => {
-                    setData({ ...data, date_come: e.target.value });
-                  }}
-                />
-              </div>
-              {location.state && location.state.id === "5" ? (
-                <div className="box-date">
-                  to
-                  <input
-                    type="date"
-                    className="input-date"
-                    placeholder="dd-mm-yyyy"
-                    min={new Date().toISOString().split("T")[0]}
-                    onChange={(e) => {
-                      setData({ ...data, date_end: e.target.value });
+                <LocalizationProvider
+                  dateAdapter={AdapterDayjs}
+                  localeText={
+                    viVN.components.MuiLocalizationProvider.defaultProps
+                      .localeText
+                  }
+                >
+                  <DatePicker
+                    disablePast
+                    value={data.date_come}
+                    format="DD/MM/YYYY"
+                    onChange={(value) => {
+                      setData({
+                        ...data,
+                        date_come: new Date(value).toLocaleDateString("vi-VN"),
+                      });
                     }}
                   />
+                </LocalizationProvider>
+              </div>
+              {location.state &&
+              location.state._id === "658047f210a908b128352916" ? (
+                <div className="box-date">
+                  to
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    localeText={
+                      viVN.components.MuiLocalizationProvider.defaultProps
+                        .localeText
+                    }
+                  >
+                    <DatePicker
+                      disablePast
+                      value={data.date_end}
+                      format="DD/MM/YYYY"
+                      onChange={(value) => {
+                        setData({
+                          ...data,
+                          date_end: new Date(value).toLocaleDateString("vi-VN"),
+                        });
+                      }}
+                    />
+                  </LocalizationProvider>
                 </div>
               ) : (
                 ""
@@ -71,10 +97,42 @@ const OrderDetail = () => {
             </div>
 
             <FormBooking setData={setData} data={data} />
+            <div className="choose-box">
+              <div className="box-input">
+                <input
+                  className="radio-custom"
+                  type="radio"
+                  name="deliver"
+                  id="yourself"
+                  onChange={() => {
+                    setData({ ...data, deliver: "Tự đến" });
+                  }}
+                />
+                <label htmlFor="yourself" className="label">
+                  Tự đến
+                </label>
+              </div>
+              <div className="box-input">
+                <input
+                  className="radio-custom"
+                  type="radio"
+                  name="deliver"
+                  id="at_home"
+                  onChange={() => {
+                    setData({ ...data, deliver: "Đón tại nhà" });
+                  }}
+                />
+                <label htmlFor="at_home" className="label">
+                  Đón tại nhà
+                </label>
+              </div>
+            </div>
             {data.price ? data.price : ""}
             {console.log(data)}
             <div className="box-button" style={{ marginBottom: "10px" }}>
-              <PrimaryButton title="Submit" />
+              <PrimaryButton type="submit">
+                <p style={{ color: "white", fontStyle: 700 }}>Xác nhận</p>
+              </PrimaryButton>
             </div>
           </div>
         </div>

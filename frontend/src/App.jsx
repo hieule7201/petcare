@@ -12,7 +12,6 @@ import ServiceDetail from "./pages/ServiceDetail/ServiceDetail";
 import ShopHome from "./pages/Shop/ShopHome";
 import OrderDetail from "./pages/Shop/OrderDetail";
 import OrderInfo from "./pages/Shop/OrderInfo";
-import CusOrder from "./pages/Shop/CusOrder";
 import CusInfo from "./pages/Shop/CusInfo";
 import StaffSetting from "./pages/Shop/StaffSetting";
 import Service from "./pages/service/Service";
@@ -48,11 +47,10 @@ const App = () => {
 
         {/* SHOP */}
         <Route path="/shop" element={<ShopHome />} />
-        <Route path="/order_info" element={<OrderInfo />} />
-        <Route path="/cus_order" element={<CusOrder />} />
-        <Route path="/cus_info" element={<CusInfo />} />
+        <Route path="/shop/order_info" element={<OrderInfo />} />
+        <Route path="/shop/cus_info" element={<CusInfo />} />
 
-        <Route path="/staff_setting" element={<StaffSetting />} />
+        <Route path="/shop/staff_setting" element={<StaffSetting />} />
 
         <Route path="/shop/:id" element={<OrderDetail />} />
       </Routes>

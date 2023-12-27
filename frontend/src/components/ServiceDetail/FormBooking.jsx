@@ -9,29 +9,33 @@ const FormBooking = ({ data, setData }) => {
       <input
         type="text"
         className="text-custom"
+        required
         name="nameUser"
-        placeholder="Enter your name"
+        placeholder="Nhập tên"
         onChange={handleInput}
       />
       <input
         type="text"
         className="text-custom"
         name="phone"
-        placeholder="Enter your phone"
+        placeholder="Nhập số điện thoại"
+        required
         onChange={handleInput}
       />
       <input
         type="text"
         className="text-custom"
         name="email"
-        placeholder="Enter your mail"
+        placeholder="Nhập email"
+        required
         onChange={handleInput}
       />
       <input
         type="text"
         className="text-custom"
+        required
         name="address"
-        placeholder="Enter your address"
+        placeholder="Nhập địa chỉ"
         onChange={handleInput}
       />
     </form>

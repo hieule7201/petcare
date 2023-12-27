@@ -16,7 +16,7 @@ const DashboardHeader = () => {
           <div className="box-user">
             <FaRegUserCircle className="d_user_icon" />
             <div className="box-logout">
-              <Link>Log out</Link>
+              <Link>Đăng xuất</Link>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ const Footer = () => {
           <h3 className="logo">Petty</h3>
         </Link>
         <div className="footer-links">
-          <p className="footer-title">Link</p>
+          <p className="footer-title">Đường dẫn</p>
           {links.map(({ name, path }, index) => {
             return (
               <div key={index}>
@@ -23,17 +23,17 @@ const Footer = () => {
           })}
         </div>
         <div className="footer-links">
-          <p className="footer-title">Employee</p>
-          <Link to="/login">Login</Link>
+          <p className="footer-title">Nhân viên</p>
+          <Link to="/login">Đăng nhập</Link>
         </div>
         <div className="footer-links">
-          <p className="footer-title">Contact us</p>
+          <p className="footer-title">Kết nối</p>
           <div className="box-contact">
-            <p className="contact-title">Phone:</p>
+            <p className="contact-title">Số điện thoại:</p>
             <p>+84 258 542 336</p>
           </div>
           <div className="box-contact">
-            <p className="contact-title">Address:</p>
+            <p className="contact-title">Địa chỉ:</p>
             <p>02 Thanh Son, Thanh Binh, Hai Chau, Da Nang</p>
           </div>
         </div>

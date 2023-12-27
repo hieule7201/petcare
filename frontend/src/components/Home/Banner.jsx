@@ -6,6 +6,8 @@ import "swiper/css/navigation";
 
 import { Navigation, Pagination } from "swiper/modules";
 import { banner_pet } from "../../data";
+import { Link } from "react-router-dom";
+import PrimaryButton from "../../UI/PrimaryButton";
 const Banner = () => {
   return (
     <div className="banner">
@@ -22,6 +24,17 @@ const Banner = () => {
                 <span className="banner-sub_title">{sub_title}</span>
                 <h1 className="banner-title">{title}</h1>
                 <p className="banner_desc">{desc}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: 1 + "rem",
+                    width: 30 + "%",
+                  }}
+                >
+                  <PrimaryButton>
+                    <Link to="/service">Đặt ngay</Link>
+                  </PrimaryButton>
+                </div>
               </div>
               <div className="banner-right">
                 <img src={img} alt="" />

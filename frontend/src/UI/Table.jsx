@@ -1,5 +1,4 @@
 // import { viVN } from "@mui/material/locale";
-import { service_lists } from "../data";
 import { DataGrid, GridToolbar, viVN } from "@mui/x-data-grid";
 
 const Table = () => {
@@ -15,15 +14,7 @@ const Table = () => {
     { field: "cal", headerName: "Product Id", minWidth: 150, flex: 0.7 },
   ];
   const row = [];
-  service_lists &&
-    service_lists.forEach((item) => {
-      row.push({
-        id: item.id,
-        name: item.name,
-        phone: item.img,
-        cal: item.short_desc,
-      });
-    });
+
   return (
     <div className="table-box">
       <DataGrid

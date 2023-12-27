@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { service_lists } from "../../data";
 import img_card_default from "../../assets/img/service_default.jpg";
 import Navbar from "../../components/Navbar";
 import "./service.css";
@@ -9,13 +8,12 @@ import { useSelector } from "react-redux";
 const Service = () => {
   const navigate = useNavigate();
   const service = useSelector((state) => state.service);
-  console.log(service);
   return (
     <>
       <Navbar />
       <div className="service">
         <div className="box-header">
-          <h2 className="service-header">Services</h2>
+          <h2 className="service-header">Các dịch vụ</h2>
         </div>
         <div className="container services-lists">
           {service.services.map(({ _id, name, img, des }, index) => {
