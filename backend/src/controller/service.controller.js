@@ -2,9 +2,16 @@ import serviceService from "../service/service.service.js";
 import HttpStatus from "http-status-codes";
 
 const add_service = async (req, res, next) => {
-  const { name, img, des } = req.body;
+  const { name, img, des, times, weights, hairs } = req.body;
   try {
-    const service = await serviceService.add_service({ name, img, des });
+    const service = await serviceService.add_service({
+      name,
+      img,
+      des,
+      times,
+      weights,
+      hairs,
+    });
     res.status(HttpStatus.OK).json({
       message: "register successfully",
       data: "",
@@ -13,6 +20,7 @@ const add_service = async (req, res, next) => {
     next(e);
   }
 };
+
 const get_all_service = async (req, res, next) => {
   try {
     const services = await serviceService.get_all_service();
@@ -24,6 +32,7 @@ const get_all_service = async (req, res, next) => {
     next(e);
   }
 };
+
 const find_service_by_id = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -36,6 +45,7 @@ const find_service_by_id = async (req, res, next) => {
     next(error);
   }
 };
+
 export default {
   add_service,
   get_all_service,

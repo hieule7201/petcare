@@ -23,7 +23,7 @@ const App = () => {
   useEffect(() => {
     // loadUser();
     dispatch(getAllService());
-  }, []);
+  });
   const loadUser = async () => {
     try {
       dispatch(loginStart());

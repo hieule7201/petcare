@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { long } from "../../data";
 
-const Long = ({ setData, data }) => {
+const Long = ({ hairs, setData, data }) => {
   const [choose, setChoose] = useState("");
   return (
     <div className="box-long">
       <div className="choose-box">
-        {long.map((props) => {
+        {hairs.map((props) => {
           return (
-            <div className="box-input" key={props.id}>
+            <div className="box-input" key={props.value}>
               <input
                 className="radio-custom"
                 type="radio"
@@ -30,7 +29,7 @@ const Long = ({ setData, data }) => {
         {choose &&
           choose.weight.map((weight) => {
             return (
-              <div className="box-input" key={weight.id}>
+              <div className="box-input" key={weight.value}>
                 <input
                   type="radio"
                   name="weight"

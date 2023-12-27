@@ -1,22 +1,22 @@
 import React from "react";
-import { time_come } from "../../data";
 
-const Time = ({ data, setData }) => {
+const Time = ({ times, data, setData }) => {
   return (
     <div className="choose-box">
-      {time_come.map((props) => {
+      {times.map((props) => {
         return (
-          <div key={props.id} className="box-input">
+          <div key={props._id} className="box-input">
             <input
+              disabled={props.total === 0 ? true : false}
               className="radio-custom"
               type="radio"
               name="time"
-              id={props.id}
+              id={props._id}
               onChange={() => {
                 setData({ ...data, time_come: props.value });
               }}
             />
-            <label className="label" htmlFor={props.id}>
+            <label className="label" htmlFor={props._id}>
               {props.value}
             </label>
           </div>

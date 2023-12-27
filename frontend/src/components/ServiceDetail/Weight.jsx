@@ -1,12 +1,11 @@
 import React from "react";
-import { service_attr } from "../../data";
 
-const Weight = ({ setData, data }) => {
+const Weight = ({ prices, setData, data }) => {
   return (
     <div className="choose-box">
-      {service_attr.map((item) => {
+      {prices.map((item) => {
         return (
-          <div className="box-input" key={item.id}>
+          <div className="box-input" key={item.value}>
             <input
               className="radio-custom"
               type="radio"

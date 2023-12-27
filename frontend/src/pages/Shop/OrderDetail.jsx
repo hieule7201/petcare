@@ -16,7 +16,7 @@ const OrderDetail = () => {
   const [data, setData] = useState({
     idService: location.state._id,
     deliver: "",
-    style_long: "",
+    hair: "",
     weight: "",
     time_come: "",
     date_come: "",
@@ -37,12 +37,20 @@ const OrderDetail = () => {
             <h5>{location.state.name}</h5>
 
             {location.state &&
-            location.state._id !== "6580473510a908b128352912" ? (
-              <Weight setData={setData} data={data} />
+            location.state._id !== "658befc7cc5968df9f28604e" ? (
+              <Weight
+                prices={location.state.weights}
+                setData={setData}
+                data={data}
+              />
             ) : (
-              <Long setData={setData} data={data} />
+              <Long
+                hairs={location.state.hairs}
+                setData={setData}
+                data={data}
+              />
             )}
-            <Time setData={setData} data={data} />
+            <Time times={location.state.times} setData={setData} data={data} />
 
             <div className="box-date">
               <div className="box-date">
@@ -68,7 +76,7 @@ const OrderDetail = () => {
                 </LocalizationProvider>
               </div>
               {location.state &&
-              location.state._id === "658047f210a908b128352916" ? (
+              location.state._id === "658bee74cc5968df9f286042" ? (
                 <div className="box-date">
                   to
                   <LocalizationProvider

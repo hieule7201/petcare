@@ -15,11 +15,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const ServiceDetail = () => {
   const location = useLocation();
-  console.log(location.number);
   const [data, setData] = useState({
     idService: location.state._id,
-    spices: "",
-    style_long: "",
+    hair: "",
     weight: "",
     time_come: "",
     date_come: "",
@@ -49,12 +47,16 @@ const ServiceDetail = () => {
 
         <div className="detail-left">
           {location.state &&
-          location.state._id !== "6580473510a908b128352912" ? (
-            <Weight setData={setData} data={data} />
+          location.state._id !== "658befc7cc5968df9f28604e" ? (
+            <Weight
+              prices={location.state.weights}
+              setData={setData}
+              data={data}
+            />
           ) : (
-            <Long setData={setData} data={data} />
+            <Long hairs={location.state.hairs} setData={setData} data={data} />
           )}
-          <Time setData={setData} data={data} />
+          <Time times={location.state.times} setData={setData} data={data} />
 
           <div className="box-date">
             <div className="box-date">
@@ -81,7 +83,7 @@ const ServiceDetail = () => {
               </LocalizationProvider>
             </div>
             {location.state._id &&
-            location.state._id === "658047f210a908b128352916" ? (
+            location.state._id === "658bee74cc5968df9f286042" ? (
               <div className="box-date">
                 to
                 <LocalizationProvider
