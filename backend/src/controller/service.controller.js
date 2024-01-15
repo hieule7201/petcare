@@ -2,13 +2,12 @@ import serviceService from "../service/service.service.js";
 import HttpStatus from "http-status-codes";
 
 const add_service = async (req, res, next) => {
-  const { name, img, des, times, weights, hairs } = req.body;
+  const { name, img, des, weights, hairs } = req.body;
   try {
     const service = await serviceService.add_service({
       name,
       img,
       des,
-      times,
       weights,
       hairs,
     });

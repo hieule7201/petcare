@@ -21,8 +21,13 @@ const DashboardSlide = ({ active }) => {
           </Link>
         </div>
         <div className={`d_service ${active === 5 ? "active" : ""}`}>
-          <Link to="/shop/staff_setting" className="d_link">
-            Cài đặt
+          <Link to="/shop/date_time" className="d_link">
+            Quản lý ngày giờ
+          </Link>
+        </div>
+        <div className={`d_service ${active === 6 ? "active" : ""}`}>
+          <Link to="/shop/create_date" className="d_link">
+            Tạo ngày phục vụ
           </Link>
         </div>
       </div>

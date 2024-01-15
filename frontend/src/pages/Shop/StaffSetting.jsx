@@ -7,7 +7,7 @@ const StaffSetting = () => {
     <>
       <DashboardHeader />
       <div className="container shop_container">
-        <DashboardSlide active={5} />
+        <DashboardSlide />
       </div>
     </>
   );

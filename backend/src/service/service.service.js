@@ -3,12 +3,11 @@ import serviceSchema from "../model/service.model.js";
 const get_all_service = async () => {
   return await serviceSchema.find();
 };
-const add_service = async ({ name, img, des, times, weights, hairs }) => {
+const add_service = async ({ name, img, des, weights, hairs }) => {
   return serviceSchema.create({
     name,
     img,
     des,
-    times,
     weights,
     hairs,
   });

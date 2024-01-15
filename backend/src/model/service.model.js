@@ -5,12 +5,6 @@ const serviceSchema = new mongoose.Schema(
     name: { type: String, required: [true, "Please enter your name"] },
     img: { type: String },
     des: { type: String },
-    times: [
-      {
-        value: { type: String },
-        total: { type: Number },
-      },
-    ],
     weights: [
       {
         value: { type: String },
@@ -26,7 +20,7 @@ const serviceSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "Service",
+    collection: "services",
   }
 );
-export default mongoose.model("Service", serviceSchema);
+export default mongoose.model("services", serviceSchema);

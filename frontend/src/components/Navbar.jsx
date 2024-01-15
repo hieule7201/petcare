@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.auth.login);
   const [showNav, setShowNav] = useState(false);
-  console.log(isAuthenticated);
   return (
     <div className="navbar">
       <div className="container navbar-container">

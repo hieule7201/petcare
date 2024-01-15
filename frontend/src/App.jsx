@@ -17,6 +17,8 @@ import StaffSetting from "./pages/Shop/StaffSetting";
 import Service from "./pages/service/Service";
 import About from "./pages/About/About";
 import { getAllService } from "./redux/actions/service";
+import CreateDate from "./pages/Shop/CreateDate";
+import DateTimeManage from "./pages/Shop/DateTimeManage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ const App = () => {
         <Route path="/shop" element={<ShopHome />} />
         <Route path="/shop/order_info" element={<OrderInfo />} />
         <Route path="/shop/cus_info" element={<CusInfo />} />
+        <Route path="/shop/create_date" element={<CreateDate />} />
+        <Route path="/shop/date_time" element={<DateTimeManage />} />
 
         <Route path="/shop/staff_setting" element={<StaffSetting />} />
 
