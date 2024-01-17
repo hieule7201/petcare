@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import userRoute from "./routes/user.route.js";
 import dateRouter from "./routes/date.route.js";
+import customerRouter from "./routes/customer.route.js";
 import serviceRouter from "./routes/service.route.js";
 import timeRouter from "./routes/time.route.js";
 import connectMongo from "./db/database.js";
@@ -24,7 +25,7 @@ app.use("/", userRoute);
 app.use("/", serviceRouter);
 app.use("/", timeRouter);
 app.use("/", dateRouter);
-
+app.use("/", customerRouter);
 app.use(errorHandle);
 
 const PORT = process.env.PORT || 5000;

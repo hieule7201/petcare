@@ -48,7 +48,7 @@
     grid-gap: 2rem;
 }
 
-.card {
+.m-card {
     overflow: hidden;
     border-radius: .5rem;
     padding: 1rem;

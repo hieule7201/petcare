@@ -45,7 +45,7 @@ const OrderDetail = () => {
   return (
     <>
       <DashboardHeader />
-      <div className="container shop_container">
+      <div className="mx-5 shop_container">
         <DashboardSlide active={1} />
         <div className="order-detail-container">
           <div className="staff-order-detail">
@@ -197,7 +197,9 @@ const OrderDetail = () => {
             {console.log(data)}
             <div className="box-button" style={{ marginBottom: "10px" }}>
               <PrimaryButton type="submit">
-                <p style={{ color: "white", fontStyle: 700 }}>Xác nhận</p>
+                <p className="mb-0" style={{ color: "white", fontStyle: 700 }}>
+                  Xác nhận
+                </p>
               </PrimaryButton>
             </div>
           </div>

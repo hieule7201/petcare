@@ -4,12 +4,12 @@ import timeService from "../service/time.service.js";
 import e from "express";
 
 const addDate = async (req, res, next) => {
-  const { idService, date, times } = req.body;
+  const { services, date, times } = req.body;
   const [day, month, year] = date.split("/");
 
   try {
     const data = await dateService.addDate({
-      idService,
+      services,
       date: new Date(year, month - 1, day),
       times,
     });

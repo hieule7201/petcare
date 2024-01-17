@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
+      unique: true,
     },
     address: {
       type: String,
@@ -45,12 +46,7 @@ const userSchema = new mongoose.Schema(
       default: 0,
     },
     avatar: {
-      public_id: {
-        type: String,
-      },
-      url: {
-        type: String,
-      },
+      type: String,
     },
 
     key_role: {

@@ -7,7 +7,7 @@ const OrderInfo = () => {
   return (
     <>
       <DashboardHeader />
-      <div className="container shop_container">
+      <div className="mx-5 shop_container">
         <DashboardSlide active={2} />
         <Table />
       </div>

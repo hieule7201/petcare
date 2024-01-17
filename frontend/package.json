@@ -15,6 +15,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
+    "bootstrap": "^4.6.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "joi": "^17.11.0",
@@ -30,6 +31,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "redux-toolkit": "^1.1.2",
+    "sweetalert2": "^11.10.3",
     "swiper": "^11.0.4",
     "web-vitals": "^2.1.4"
   },

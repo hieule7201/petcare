@@ -2,15 +2,15 @@ import React from "react";
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
 
-const StaffSetting = () => {
+const ServiceManage = () => {
   return (
     <>
       <DashboardHeader />
       <div className="mx-5 shop_container">
-        <DashboardSlide />
+        <DashboardSlide active={7} />
       </div>
     </>
   );
 };
 
-export default StaffSetting;
+export default ServiceManage;

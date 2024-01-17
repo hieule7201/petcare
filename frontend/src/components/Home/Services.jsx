@@ -18,7 +18,7 @@ const Services = () => {
                   state: service.services[index],
                 });
               }}
-              className="card"
+              className="m-card"
               key={_id}
             >
               <div className="card_img">
@@ -27,7 +27,7 @@ const Services = () => {
               <div className="card_info">
                 <span className="card_name">{name}</span>
                 <p className="card_short_desc">
-                  {des.length > 60 ? des.slice(0, 60) + "..." : des}
+                  {des.length > 50 ? des.slice(0, 50) + "..." : des}
                 </p>
               </div>
             </button>

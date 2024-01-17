@@ -9,7 +9,6 @@ const updateDate = async (id, { date, times }) => {
   const data = await dateModel.findById(id);
   const services = data.services;
   const dateDB = new Date(data.date).toLocaleDateString("vi-VN");
-  console.log(dateDB !== new Date(date).toLocaleDateString("vi-VN"));
   if (dateDB !== new Date(date).toLocaleDateString("vi-VN")) {
     const exit = await dateModel.findOne({ date: date, services: services });
     if (exit) throw new Error("date exits");
@@ -23,10 +22,13 @@ const findDateById = async (id) => {
   return await dateModel.findById(id);
 };
 const getAllDate = async () => {
-  return await dateModel.find().populate("services");
+  return await dateModel.find().populate("services").populate("times");
 };
 const findByIdService = async (services) => {
-  return await dateModel.find({ services: services }).populate("times");
+  return await dateModel
+    .find({ services: services })
+    .populate("services")
+    .populate("times");
 };
 export default {
   addDate,

@@ -31,6 +31,7 @@ const ServiceDetail = () => {
     email: "",
     address: "",
     deliver: "",
+    price: "",
   });
   useEffect(() => {
     getDate();
@@ -202,7 +203,9 @@ const ServiceDetail = () => {
           {data.price ? data.price : ""}
           <div className="box-button" style={{ marginBottom: "10px" }}>
             <PrimaryButton type="submit">
-              <p style={{ color: "white", fontStyle: 700 }}>Xác nhận</p>
+              <p className="mb-0" style={{ color: "white", fontStyle: 700 }}>
+                Xác nhận
+              </p>
             </PrimaryButton>
           </div>
         </div>

@@ -1,7 +1,14 @@
 import React from "react";
 import "./dashboard_slide.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const DashboardSlide = ({ active }) => {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    document.cookie =
+      "token=12121; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    navigate("/login");
+  };
+
   return (
     <>
       <div className="d_slide-container">
@@ -29,6 +36,14 @@ const DashboardSlide = ({ active }) => {
           <Link to="/shop/create_date" className="d_link">
             Tạo ngày phục vụ
           </Link>
+        </div>
+        <div className={`d_service ${active === 7 ? "active" : ""}`}>
+          <Link to="/shop/service_manage" className="d_link">
+            Quản lý dịch vụ
+          </Link>
+        </div>
+        <div className="d_service" onClick={handleSignOut}>
+          <p className="d_link">Đăng xuất</p>
         </div>
       </div>
     </>

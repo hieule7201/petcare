@@ -1,4 +1,4 @@
-.navbar {
+.m-navbar {
     background: transparent;
     position: fixed;
     top: 0;
@@ -26,7 +26,7 @@
     line-height: 150%;
 }
 
-.navbar-links {
+.m-navbar-links {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,11 +37,11 @@
     display: none;
 }
 
-.navbar-links {
+.m-navbar-links {
     font-size: 1.25rem;
 }
 
-.navbar-link {
+.m-navbar-link {
 
     color: var(--gray-7);
 }
@@ -78,7 +78,7 @@
 }
 
 
-.active {
+.m-active {
     color: var(--color-hard-primary);
 }
 

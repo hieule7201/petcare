@@ -8,7 +8,6 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { viVN } from "@mui/x-date-pickers/locales";
 import { addDate, findAllTime } from "../../api/datetime";
-import PrimaryButton from "../../UI/PrimaryButton";
 
 const CreateDate = () => {
   const [service, setService] = useState([]);
@@ -16,7 +15,7 @@ const CreateDate = () => {
   let idDate = [];
 
   const [data, setData] = useState({
-    idService: "",
+    services: "",
     date: "",
   });
   useEffect(() => {
@@ -50,7 +49,7 @@ const CreateDate = () => {
     e.preventDefault();
     try {
       const response = await addDate({
-        idService: data.idService,
+        services: data.services,
         date: data.date,
         times: idDate,
       });
@@ -63,7 +62,7 @@ const CreateDate = () => {
   return (
     <>
       <DashboardHeader />
-      <div className="container shop_container">
+      <div className="mx-5 shop_container">
         <DashboardSlide active={6} />
         <div
           style={{
@@ -80,12 +79,12 @@ const CreateDate = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={data.idService}
+                value={data.services}
                 label="Date come"
                 onChange={(e) => {
                   setData({
                     ...data,
-                    idService: e.target.value,
+                    services: e.target.value,
                   });
                 }}
               >
@@ -117,7 +116,6 @@ const CreateDate = () => {
               >
                 <DatePicker
                   disablePast
-                  value={data.date_end}
                   format="DD/MM/YYYY"
                   onChange={(value) => {
                     setData({

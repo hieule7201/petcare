@@ -10,13 +10,13 @@ const Navbar = () => {
   const { isAuthenticated } = useSelector((state) => state.auth.login);
   const [showNav, setShowNav] = useState(false);
   return (
-    <div className="navbar">
+    <div className="m-navbar">
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
           <img src={Logo} alt="" />
           <h3 className="logo">Petty</h3>
         </Link>
-        <div className={`navbar-links ${showNav ? "showNav" : "hideNav"}`}>
+        <div className={`m-navbar-links ${showNav ? "showNav" : "hideNav"}`}>
           <AiOutlineClose className="close" onClick={() => setShowNav(false)} />
           {links.map(({ name, path }, index) => {
             return (
@@ -24,8 +24,8 @@ const Navbar = () => {
                 <NavLink
                   to={path}
                   onClick={() => setShowNav(false)}
-                  className={`navbar-link ${({ isActive }) =>
-                    isActive ? "active" : ""}`}
+                  className={`m-navbar-link ${({ isActive }) =>
+                    isActive ? "m-active" : ""}`}
                 >
                   {name}
                 </NavLink>

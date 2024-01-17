@@ -15,7 +15,7 @@ const Banner = () => {
         pagination={true}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="container banner-container"
+        className="m-container banner-container"
       >
         {banner_pet.map(({ sub_title, title, desc, img }, index) => {
           return (

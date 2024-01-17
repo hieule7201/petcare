@@ -41,12 +41,10 @@ const Login = () => {
       });
       dispatch(loginSuccess());
 
-      console.log(res.data.message);
       toast.success(res.data.message);
 
       navigate("/shop");
     } catch (error) {
-      console.log(error.response?.data.message);
       toast.error(error.response?.data.message);
     }
   };
@@ -56,7 +54,7 @@ const Login = () => {
       <Navbar />
       <div className="container login-container">
         <InputForm method="POST" onSubmit={handleSubmit(onSubmit)}>
-          <h5 className="login-title">Login</h5>
+          <h5 className="login-title">Đăng nhập</h5>
           <div className="login-field">
             <input
               type="text"
@@ -70,7 +68,7 @@ const Login = () => {
             <div className="input-password">
               <input
                 type={`${showPassword ? "text" : "password"}`}
-                placeholder="Password"
+                placeholder="Mật khẩu"
                 name="password"
                 {...register("password")}
               />
@@ -97,15 +95,15 @@ const Login = () => {
           <div className="login-links">
             <div className="login-remember">
               <input type="checkbox" name="remember" />
-              <label htmlFor="remember">Remember me</label>
+              <label htmlFor="remember" className="mb-0">
+                Ghi nhớ
+              </label>
             </div>
-            <p className="login-forget">Forget Password</p>
+            <p className="login-forget">Quên mật khẩu</p>
           </div>
-          <PrimaryButton type="submit" title="Login" />
-          <div className="login-change_register">
-            <p>Don't have account?</p>
-            <NavLink to="/register">Register</NavLink>
-          </div>
+          <button type="submit" className="primary-btn">
+            Đăng nhập
+          </button>
         </InputForm>
       </div>
       <Footer />
