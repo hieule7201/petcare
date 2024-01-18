@@ -15,7 +15,7 @@ const Long = ({ hairs, setData, data }) => {
                 id={props.name}
                 onChange={() => {
                   setChoose(props);
-                  setData({ ...data, style_long: props.name });
+                  setData({ ...data, hair: props.name });
                 }}
               />
               <label className="label" htmlFor={props.name}>

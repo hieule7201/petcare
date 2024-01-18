@@ -60,3 +60,11 @@
 .is-close:focus {
     color: black;
 }
+
+.textContainer {
+    display: block;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

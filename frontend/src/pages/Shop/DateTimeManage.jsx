@@ -352,14 +352,14 @@ const DateTimeManage = () => {
                   class="btn btn-secondary"
                   onClick={() => setIsShow((isShow) => !isShow)}
                 >
-                  Close
+                  Đóng
                 </button>
                 <button
                   type="submit"
                   class="btn btn-primary"
                   onClick={handleClickSubmit}
                 >
-                  Submit
+                  Xác nhận
                 </button>
               </div>
             </div>

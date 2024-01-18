@@ -23,7 +23,7 @@ const customerSchema = new mongoose.Schema(
       required: [true, "Please enter your phone"],
       minLength: [10, "no should have minimum 10 digits"],
       maxLength: [11, "no should have maximum 10 digits"],
-      match: [/\d{11}/, "no should only have digits"],
+      match: [/\d{10}/, "no should only have digits"],
     },
     address: {
       type: String,

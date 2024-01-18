@@ -2,23 +2,33 @@ import mongoose, { Schema } from "mongoose";
 
 const orderSchema = new mongoose.Schema(
   {
-    service: {
+    services: {
       type: Schema.Types.ObjectId,
       ref: "services",
       require: true,
     },
+    customer: {
+      type: String,
+      ref: "customers",
+    },
+    status: { type: String },
     hair: {
       type: String,
     },
     weight: { type: String },
     time_come: { type: String },
     date_come: { type: Date },
+    date_end: { type: Date },
+    deliver: { type: String },
+    price: { type: Number },
   },
   {
     timestamps: true,
     collection: "orders",
   }
 );
+
+export default mongoose.model("orders", orderSchema);
 
 // idService: "",
 //     hair: "",
