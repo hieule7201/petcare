@@ -50,7 +50,7 @@ const editStatus = async (req, res, next) => {
 };
 const addOder = async (req, res, next) => {
   const {
-    service,
+    services,
     customer,
     status,
     hair,
@@ -72,7 +72,7 @@ const addOder = async (req, res, next) => {
 
   try {
     const order = await orderService.addOder({
-      service,
+      services,
       customer,
       status,
       hair,

@@ -57,6 +57,7 @@ const OrderDetail = () => {
       console.log(error.data.response.message);
     }
   };
+  console.log(data);
   const handleOrder = async () => {
     Swal.fire({
       title: "Bạn có chắc chắn ?",
@@ -74,8 +75,8 @@ const OrderDetail = () => {
               date_end: data.date_end,
               deliver: data.deliver,
               hair: data.hair,
-              service: data.idService,
-              status: "Chờ xác nhận",
+              services: data.idService,
+              status: "Đã xác nhận",
               time_come: data.time_come,
               weight: data.weight,
               price: data.price,
@@ -100,7 +101,7 @@ const OrderDetail = () => {
               date_end: data.date_end,
               deliver: data.deliver,
               hair: data.hair,
-              service: data.idService,
+              services: data.idService,
               status: "Đã xác nhận",
               time_come: data.time_come,
               weight: data.weight,
@@ -277,7 +278,7 @@ const OrderDetail = () => {
                   }}
                 />
                 <label htmlFor="at_home" className="label">
-                  Đón tại nhà
+                  Đón tại nhà &#40;&lt;5km&#41;
                 </label>
               </div>
             </div>

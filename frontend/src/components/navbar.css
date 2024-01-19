@@ -71,6 +71,7 @@
 .user-icon:hover .navbar-subnav_login {
     display: flex;
     transition: var(--transition);
+
 }
 
 .menu-icon {
@@ -78,6 +79,7 @@
 }
 
 
+.m-navbar-link:hover,
 .m-active {
     color: var(--color-hard-primary);
 }

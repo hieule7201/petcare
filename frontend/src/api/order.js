@@ -26,7 +26,7 @@ const updateOrder = async (
   });
 };
 const addOrder = async ({
-  service,
+  services,
   customer,
   status,
   hair,
@@ -38,7 +38,7 @@ const addOrder = async ({
   price,
 }) => {
   return await instance.post("/add-order", {
-    service,
+    services,
     customer,
     status,
     hair,

@@ -32,7 +32,9 @@ const Banner = () => {
                   }}
                 >
                   <PrimaryButton>
-                    <Link to="/service">Đặt ngay</Link>
+                    <Link to="/service" className="btn-banner">
+                      Đặt ngay
+                    </Link>
                   </PrimaryButton>
                 </div>
               </div>

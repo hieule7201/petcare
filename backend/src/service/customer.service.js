@@ -14,6 +14,14 @@ const addCount = async (phone) => {
     });
   return;
 };
+const minusCount = async (id) => {
+  const data = await customerSchema.findById(id);
+  if (data)
+    return await customerSchema.findByIdAndUpdate(data._id, {
+      count: data.count - 1,
+    });
+  return;
+};
 const updateCustomer = async (id, { phone, email, name, address }) => {
   return await customerSchema.findByIdAndUpdate(id, {
     phone,
@@ -36,4 +44,5 @@ export default {
   updateCustomer,
   getCusById,
   addCustomer,
+  minusCount,
 };

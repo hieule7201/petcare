@@ -179,7 +179,6 @@ const DateTimeManage = () => {
                       sx={{
                         color: "white",
                         fontWeight: 500,
-                        textAlign: "center",
                         fontSize: "1rem",
                       }}
                       scope="col"
@@ -190,7 +189,7 @@ const DateTimeManage = () => {
                       sx={{
                         color: "white",
                         fontWeight: 500,
-                        textAlign: "center",
+
                         fontSize: "1rem",
                       }}
                       scope="col"
@@ -201,7 +200,7 @@ const DateTimeManage = () => {
                       sx={{
                         color: "white",
                         fontWeight: 500,
-                        textAlign: "center",
+
                         fontSize: "1rem",
                       }}
                       scope="col"
@@ -212,7 +211,7 @@ const DateTimeManage = () => {
                       sx={{
                         color: "white",
                         fontWeight: 500,
-                        textAlign: "center",
+
                         fontSize: "1rem",
                       }}
                       scope="col"
@@ -223,7 +222,7 @@ const DateTimeManage = () => {
                       sx={{
                         color: "white",
                         fontWeight: 500,
-                        textAlign: "center",
+
                         fontSize: "1rem",
                       }}
                       scope="col"
@@ -235,6 +234,11 @@ const DateTimeManage = () => {
                 <TableBody>
                   {data
                     .slice(page * rowPage, page * rowPage + rowPage)
+                    .sort((a, b) => {
+                      if (a.date < b.date) return 1;
+                      else if (a.date > b.date) return -1;
+                      return 0;
+                    })
                     .map((item) => {
                       return (
                         <TableRow>

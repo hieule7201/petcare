@@ -1,4 +1,5 @@
 import orderModel from "../model/order.model.js";
+import customerService from "./customer.service.js";
 
 const getAllOrders = async () => {
   return await orderModel
@@ -19,7 +20,7 @@ const getOderByCustomer = async (customer) => {
     .populate("customer");
 };
 const addOder = async ({
-  service,
+  services,
   customer,
   status,
   hair,
@@ -31,7 +32,7 @@ const addOder = async ({
   price,
 }) => {
   return await orderModel.create({
-    service,
+    services,
     customer,
     status,
     hair,
@@ -44,6 +45,10 @@ const addOder = async ({
   });
 };
 const editStatus = async (id, status) => {
+  const getCus = await orderModel.findById(id);
+  if (getCus && status === "Đã hủy") {
+    await customerService.minusCount(getCus.customer);
+  }
   return await orderModel.findByIdAndUpdate(id, { status: status });
 };
 const updateOrder = async (

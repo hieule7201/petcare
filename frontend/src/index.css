@@ -50,7 +50,12 @@ body {
     position: relative;
 }
 
-a {
+a::after::before {
+    text-decoration: none;
+
+}
+
+a:hover {
     text-decoration: none;
 }
 

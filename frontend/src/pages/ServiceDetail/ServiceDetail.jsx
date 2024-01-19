@@ -79,7 +79,7 @@ const ServiceDetail = () => {
               date_end: data.date_end,
               deliver: data.deliver,
               hair: data.hair,
-              service: data.idService,
+              services: data.idService,
               status: "Chờ xác nhận",
               time_come: data.time_come,
               weight: data.weight,
@@ -105,7 +105,7 @@ const ServiceDetail = () => {
               date_end: data.date_end,
               deliver: data.deliver,
               hair: data.hair,
-              service: data.idService,
+              services: data.idService,
               status: "Chờ xác nhận",
               time_come: data.time_come,
               weight: data.weight,
@@ -128,6 +128,7 @@ const ServiceDetail = () => {
       }
     });
   };
+
   return (
     <>
       <Navbar />
@@ -211,7 +212,10 @@ const ServiceDetail = () => {
                 }}
               >
                 {dates
-                  .filter((value) => new Date(value.date) >= new Date())
+                  .filter(
+                    (value) =>
+                      new Date(value.date).getDate() > new Date().getDate() - 1
+                  )
                   .map((item) => {
                     return (
                       <MenuItem
@@ -283,7 +287,7 @@ const ServiceDetail = () => {
                 }}
               />
               <label htmlFor="at_home" className="label">
-                Đón tại nhà
+                Đón tại nhà &#40;&lt;5km&#41;
               </label>
             </div>
           </div>

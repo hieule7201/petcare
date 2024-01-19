@@ -23,6 +23,9 @@ const ServiceManage = () => {
     { id: "des", name: "Chi tiết" },
     { id: "action", name: "Thao tác" },
   ];
+  const [img, setImg] = useState(null);
+  const [editSer, setEditSer] = useState({});
+  const [isShow, setIsShow] = useState(false);
   const [name, setName] = useState("");
   const [service, setService] = useState([]);
   const [page, pageChange] = useState(0);
@@ -49,6 +52,35 @@ const ServiceManage = () => {
       });
     }
   };
+  const onChangeImage = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImg(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "Bạn có chắc chắn ?",
+      showCancelButton: true,
+      confirmButtonText: "Đúng",
+      cancelButtonText: "Không",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          Swal.fire({
+            title: "Success",
+            icon: "success",
+            timer: 3000,
+          });
+        } catch (error) {
+          Swal.fire({
+            title: error.message,
+            icon: "error",
+            timer: 3000,
+          });
+        }
+      }
+    });
+  };
   return (
     <>
       <DashboardHeader />
@@ -64,6 +96,13 @@ const ServiceManage = () => {
                 className="form-control  w-25 "
                 onChange={(event) => setName(event.target.value)}
               />
+              <button
+                className="btn btn-success ml-3"
+                style={{ background: "var(--color-primary)" }}
+                onClick={() => setIsShow(true)}
+              >
+                Tạo mới
+              </button>
             </div>
             <Paper sx={{ width: "100%", marginLeft: "1.25rem" }}>
               <TableContainer>
@@ -117,10 +156,20 @@ const ServiceManage = () => {
                             </TableCell>
 
                             <TableCell>
-                              <button className="btn btn-warning">
+                              <button
+                                className="btn btn-warning"
+                                onClick={() => {
+                                  setIsShow(true);
+                                  setEditSer(item);
+                                  setImg(item.img);
+                                }}
+                              >
                                 Chỉnh sửa
                               </button>
-                              <button className="btn btn-danger ml-3">
+                              <button
+                                className="btn btn-danger ml-3"
+                                onClick={handleDelete}
+                              >
                                 Xoá
                               </button>
                             </TableCell>
@@ -149,6 +198,74 @@ const ServiceManage = () => {
             </Paper>
           </div>
         </div>
+        {isShow ? (
+          <div class="b-modal">
+            <div class="modal-content w-50">
+              <div class="modal-header">
+                <h2>Dịch vụ</h2>
+                <span
+                  class="is-close"
+                  onClick={() => {
+                    setIsShow((isShow) => !isShow);
+                    setImg(null);
+                  }}
+                >
+                  &times;
+                </span>
+              </div>
+              <div class="modal-body px-5">
+                <div className="form-input d-flex flex-column justify-content-center mb-3">
+                  <label htmlFor="name">Tên Dịch vụ</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Nhập Tên dịch vụ"
+                    className="form-control  w-100 "
+                    defaultValue={editSer.name}
+                  />
+                </div>
+                <div className="form-input d-flex flex-column justify-content-center mb-3">
+                  <label htmlFor="des">Giới thiệu</label>
+                  <textarea
+                    type="text"
+                    name="des"
+                    placeholder="Nhập Giới thiệu"
+                    className="form-control  w-100 "
+                    defaultValue={editSer.des}
+                  />
+                </div>
+                <div className="form-input d-flex flex-column justify-content-center mb-3">
+                  <label htmlFor="img">Chọn ảnh</label>
+                  <input
+                    type="file"
+                    accept="images/**"
+                    name="img"
+                    className="form-control  w-100 mb-3"
+                    onChange={onChangeImage}
+                  />
+                  <img src={img} alt="" style={{ maxWidth: "10rem" }} />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onClick={() => {
+                    setIsShow((isShow) => !isShow);
+                    setImg(null);
+                  }}
+                >
+                  Đóng
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Xác nhận
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
