@@ -133,14 +133,21 @@ const ServiceDetail = () => {
     <>
       <Navbar />
 
-      <div className="container detail-container">
+      <div className="m-container detail-container">
         <div
-          className="detail-right"
-          style={{
-            backgroundImage: ` url("${location.state.img}")`,
-          }}
+          className="card bg-dark text-white overflow-hidden border-0"
+          style={{ height: "20rem" }}
         >
-          <div className="box-title">
+          <img
+            src={location.state.img}
+            alt=""
+            className="card-img"
+            style={{ marginTop: "-10rem" }}
+          />
+          <div
+            className="card-img-overlay d-flex flex-column align-items-center justify-content-center"
+            style={{ background: "rgba(0,0,0,.2)" }}
+          >
             <h3>{location.state.name}</h3>
             <p>{location.state.des}</p>
           </div>
@@ -198,12 +205,12 @@ const ServiceDetail = () => {
             </div>
           ) : (
             <FormControl sx={{ m: 1, minWidth: 150 }}>
-              <InputLabel id="demo-simple-select-label">Date come</InputLabel>
+              <InputLabel id="demo-simple-select-label">Ngày đến</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={data.date_come}
-                label="Date come"
+                label="Ngày đến"
                 onChange={(event) => {
                   setData({
                     ...data,

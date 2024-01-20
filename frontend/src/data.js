@@ -17,16 +17,19 @@ export const links = [
 
 export const banner_pet = [
   {
-    sub_title: "Giảm giá 10/11 - 11/11",
-    title: "Lên đến 20% cho tất cả dịch vụ",
+    title: "Petty",
     desc: "Nhanh tay đặt ngay",
-    img: banner1,
+    img: "https://petlifesa.com/wp-content/uploads/slider2/PLSA630-petilfesa-web-dog-banner-image-FA.jpeg",
   },
   {
-    sub_title: "Quà tặng",
-    title: "Nhiều phần quà cho các bé đến Petty",
+    title: "Petty",
     desc: "Nhanh tay đặt ngay, nhận được quà to",
-    img: banner1,
+    img: "https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-cute-pet-cartoon-fresh-hand-painted-banner-image_176200.jpg",
+  },
+  {
+    title: "Petty",
+    desc: "Nhanh tay đặt ngay, nhận được quà to",
+    img: "https://img.freepik.com/free-photo/studio-shot-cute-border-collie-dog_23-2148097523.jpg",
   },
 ];
 

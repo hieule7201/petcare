@@ -32,12 +32,6 @@ const Navbar = () => {
               </div>
             );
           })}
-        </div>
-        <div className="navbar-icon">
-          <div className="search-icon">
-            <BiSearch />
-          </div>
-
           <div className="menu-icon">
             <BiMenu
               onClick={() => {

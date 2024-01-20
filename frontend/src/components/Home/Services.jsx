@@ -8,8 +8,8 @@ const Services = () => {
   const service = useSelector((state) => state.service);
   return (
     <div className="container services-container">
-      <h2 className="services-header">Các dịch vụ</h2>
-      <div className="services-lists">
+      <h2 className="">Các dịch vụ</h2>
+      <div className="row ">
         {service.services.map(({ _id, name, img, des }, index) => {
           return (
             <button
@@ -18,17 +18,21 @@ const Services = () => {
                   state: service.services[index],
                 });
               }}
-              className="m-card"
-              key={_id}
+              className="col-lg-6 col-md-6 col p-0 bg-white "
             >
-              <div className="card_img">
-                <img src={img ? img : img_card_default} alt="" />
-              </div>
-              <div className="card_info">
-                <span className="card_name">{name}</span>
-                <p className="card_short_desc">
-                  {des.length > 50 ? des.slice(0, 50) + "..." : des}
-                </p>
+              <div className="card bg-dark text-white border-0 m-3 " key={_id}>
+                <img
+                  src={img ? img : img_card_default}
+                  alt=""
+                  className="card-img"
+                />
+                <div
+                  className="card-img-overlay d-flex flex-column justify-content-end align-items-start"
+                  style={{ background: "rgba(0 ,0, 0, .2)" }}
+                >
+                  <h5 className="card-title text-left">{name}</h5>
+                  <p className="card-text text-left">{des}</p>
+                </div>
               </div>
             </button>
           );

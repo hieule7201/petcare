@@ -8,6 +8,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { viVN } from "@mui/x-date-pickers/locales";
 import { addDate, findAllTime } from "../../api/datetime";
+import Swal from "sweetalert2";
 
 const CreateDate = () => {
   const [service, setService] = useState([]);
@@ -47,17 +48,27 @@ const CreateDate = () => {
   };
   const handleClick = async (e) => {
     e.preventDefault();
-    try {
-      const response = await addDate({
-        services: data.services,
-        date: data.date,
-        times: idDate,
-      });
-      window.location.reload();
-      toast.success(response.data.message);
-    } catch (error) {
-      toast.error(error.data.response.message);
-    }
+    Swal.fire({
+      title: "Bạn có chắc chắn ?",
+      showCancelButton: true,
+      confirmButtonText: "Đúng",
+      cancelButtonText: "Không",
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        try {
+          const response = await addDate({
+            services: data.services,
+            date: data.date,
+            times: idDate,
+          });
+          window.location.reload();
+          toast.success(response.data.message);
+        } catch (error) {
+          toast.error(error.data.response.message);
+        }
+      }
+    });
   };
   return (
     <>

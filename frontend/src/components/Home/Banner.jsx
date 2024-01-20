@@ -4,42 +4,35 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { banner_pet } from "../../data";
 import { Link } from "react-router-dom";
-import PrimaryButton from "../../UI/PrimaryButton";
 const Banner = () => {
   return (
-    <div className="banner">
+    <div className="banner mt-5">
       <Swiper
-        pagination={true}
-        navigation={true}
-        modules={[Pagination, Navigation]}
+        pagination={{ clickable: true }}
+        modules={[Pagination, Navigation, Autoplay]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         className="m-container banner-container"
       >
-        {banner_pet.map(({ sub_title, title, desc, img }, index) => {
+        {banner_pet.map(({ title, desc, img }, index) => {
           return (
-            <SwiperSlide className="banner-slides" key={index}>
-              <div className="banner-left">
-                <span className="banner-sub_title">{sub_title}</span>
-                <h1 className="banner-title">{title}</h1>
-                <p className="banner_desc">{desc}</p>
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: 1 + "rem",
-                    width: 30 + "%",
-                  }}
-                >
-                  <PrimaryButton>
-                    <Link to="/service" className="btn-banner">
-                      Đặt ngay
-                    </Link>
-                  </PrimaryButton>
-                </div>
-              </div>
-              <div className="banner-right">
-                <img src={img} alt="" />
+            <SwiperSlide
+              className="card border-0"
+              style={{ maxHeight: "30rem" }}
+              key={index}
+            >
+              <img src={img} alt="" className="card-img" />
+              <div className="card-img-overlay d-flex flex-column align-items-start justify-content-center pl-5">
+                <h1 className="card-title">{title}</h1>
+                <h5 className="card-text">{desc}</h5>
+                <Link to="/service" className="btn btn-success">
+                  Đặt ngay
+                </Link>
               </div>
             </SwiperSlide>
           );

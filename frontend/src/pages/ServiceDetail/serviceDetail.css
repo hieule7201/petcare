@@ -123,8 +123,6 @@
     padding: .8rem 1rem;
     border: 1px solid var(--color-hard-primary);
     border-radius: .5rem;
-    width: 100%;
-    max-width: 16rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
