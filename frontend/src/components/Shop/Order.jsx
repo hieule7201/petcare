@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import img_card_default from "../../assets/img/service_default.jpg";
 import { useSelector } from "react-redux";
+import { URL_IMG } from "../../api/config";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -32,11 +33,14 @@ const Order = () => {
               }}
               className="col-lg-6 col-md-6 col p-0 bg-white "
             >
-              <div className="card bg-dark text-white border-0 m-3 " key={_id}>
+              <div
+                className="card bg-dark text-white border-0 m-3 h-100"
+                key={_id}
+              >
                 <img
-                  src={img ? img : img_card_default}
+                  src={img ? URL_IMG + img : img_card_default}
                   alt=""
-                  className="card-img"
+                  className="card-img h-100"
                 />
                 <div
                   className="card-img-overlay d-flex flex-column justify-content-end align-items-start"

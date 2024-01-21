@@ -17,6 +17,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { addCount, addCus, getCusByPhone } from "../../api/customer";
 import { addOrder } from "../../api/order";
 import Swal from "sweetalert2";
+import { URL_IMG } from "../../api/config";
 
 const ServiceDetail = () => {
   const location = useLocation();
@@ -139,7 +140,7 @@ const ServiceDetail = () => {
           style={{ height: "20rem" }}
         >
           <img
-            src={location.state.img}
+            src={URL_IMG + location.state.img}
             alt=""
             className="card-img"
             style={{ marginTop: "-10rem" }}

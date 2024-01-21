@@ -12,7 +12,14 @@ import {
   TableRow,
 } from "@mui/material";
 import Swal from "sweetalert2";
-import { get_all_service } from "../../api/service";
+import {
+  add_service,
+  delete_service,
+  get_all_service,
+  update_service,
+} from "../../api/service";
+import { toast } from "react-toastify";
+import { URL_IMG } from "../../api/config";
 
 const ServiceManage = () => {
   const columns = [
@@ -24,7 +31,13 @@ const ServiceManage = () => {
     { id: "action", name: "Thao tác" },
   ];
   const [img, setImg] = useState(null);
+  const [file, setFile] = useState(null);
   const [editSer, setEditSer] = useState({});
+  const [kg5, setKg5] = useState({});
+  const [kg10, setKg10] = useState({});
+  const [kg20, setKg20] = useState({});
+  const [kg40, setKg40] = useState({});
+
   const [isShow, setIsShow] = useState(false);
   const [name, setName] = useState("");
   const [service, setService] = useState([]);
@@ -52,12 +65,64 @@ const ServiceManage = () => {
       });
     }
   };
+  const setOnlyWeight = (weight) => {
+    setKg5(weight[0]);
+    setKg10(weight[1]);
+    setKg20(weight[2]);
+
+    setKg40(weight[3]);
+  };
   const onChangeImage = (event) => {
     if (event.target.files && event.target.files[0]) {
       setImg(URL.createObjectURL(event.target.files[0]));
+      setFile(event.target.files[0]);
     }
   };
-  const handleDelete = async () => {
+  const convertJson = (data) => {
+    return JSON.stringify(data);
+  };
+  const handleSubmit = async () => {
+    const newForm = new FormData();
+    newForm.append("file", file);
+    newForm.append("name", editSer.name);
+    newForm.append("des", editSer.des);
+    newForm.append("weights", convertJson([kg5, kg10, kg20, kg40]));
+    for (const value of newForm.values()) {
+      console.log(value);
+    }
+
+    if (!editSer._id) {
+      try {
+        const response = await add_service(newForm);
+        setIsShow(false);
+        getAll();
+        reset();
+        Swal.fire({
+          timer: 4000,
+          title: response.data.message,
+          icon: "success",
+        });
+      } catch (error) {
+        toast.error(error.message);
+      }
+    } else {
+      try {
+        const response = await update_service(editSer._id, newForm);
+        setIsShow(false);
+        getAll();
+        reset();
+        Swal.fire({
+          timer: 4000,
+          title: response.data.message,
+          icon: "success",
+        });
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+  };
+
+  const handleDelete = async (id) => {
     Swal.fire({
       title: "Bạn có chắc chắn ?",
       showCancelButton: true,
@@ -66,8 +131,11 @@ const ServiceManage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
+          const response = await delete_service(id);
+          getAll();
+          reset();
           Swal.fire({
-            title: "Success",
+            title: response.data.message,
             icon: "success",
             timer: 3000,
           });
@@ -81,6 +149,15 @@ const ServiceManage = () => {
       }
     });
   };
+  const reset = () => {
+    setImg(null);
+    setEditSer({});
+    setKg5({});
+    setKg10({});
+    setKg20({});
+    setKg40({});
+  };
+
   return (
     <>
       <DashboardHeader />
@@ -144,7 +221,7 @@ const ServiceManage = () => {
                             <TableCell>{item.name}</TableCell>
                             <TableCell>
                               <img
-                                src={item.img}
+                                src={URL_IMG + item.img}
                                 alt=""
                                 style={{ maxWidth: "8rem" }}
                               />
@@ -161,14 +238,16 @@ const ServiceManage = () => {
                                 onClick={() => {
                                   setIsShow(true);
                                   setEditSer(item);
-                                  setImg(item.img);
+                                  setImg(URL_IMG + item.img);
+                                  setOnlyWeight(item.weights);
+                                  setFile(item.img);
                                 }}
                               >
                                 Chỉnh sửa
                               </button>
                               <button
                                 className="btn btn-danger ml-3"
-                                onClick={handleDelete}
+                                onClick={() => handleDelete(item._id)}
                               >
                                 Xoá
                               </button>
@@ -204,10 +283,10 @@ const ServiceManage = () => {
               <div class="modal-header">
                 <h2>Dịch vụ</h2>
                 <span
-                  class="is-close"
+                  className="is-close"
                   onClick={() => {
                     setIsShow((isShow) => !isShow);
-                    setImg(null);
+                    reset();
                   }}
                 >
                   &times;
@@ -221,6 +300,9 @@ const ServiceManage = () => {
                     name="name"
                     placeholder="Nhập Tên dịch vụ"
                     className="form-control  w-100 "
+                    onChange={(e) => {
+                      setEditSer({ ...editSer, name: e.target.value });
+                    }}
                     defaultValue={editSer.name}
                   />
                 </div>
@@ -232,6 +314,9 @@ const ServiceManage = () => {
                     placeholder="Nhập Giới thiệu"
                     className="form-control  w-100 "
                     defaultValue={editSer.des}
+                    onChange={(e) => {
+                      setEditSer({ ...editSer, des: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="form-input d-flex flex-column justify-content-center mb-3">
@@ -245,6 +330,65 @@ const ServiceManage = () => {
                   />
                   <img src={img} alt="" style={{ maxWidth: "10rem" }} />
                 </div>
+                <div>
+                  <p>Cân nặng</p>
+                  <div className="row d-flex">
+                    <div className="d-flex flex-column col-lg-3 col-md-3">
+                      <label htmlFor="5kg">Dưới 5kg</label>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="5kg"
+                        defaultValue={kg5?.price}
+                        onChange={(e) => {
+                          setKg5({ value: "Dưới 5 kg", price: e.target.value });
+                        }}
+                      />
+                    </div>
+                    <div className="d-flex flex-column col-lg-3 col-md-3">
+                      <label htmlFor="10kg">5kg-10kg</label>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="10kg"
+                        defaultValue={kg10?.price}
+                        onChange={(e) => {
+                          setKg10({ value: "5kg-10kg", price: e.target.value });
+                        }}
+                      />
+                    </div>
+                    <div className="d-flex flex-column col-lg-3 col-md-3">
+                      <label htmlFor="10kg-20kg">10kg-20kg</label>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="10kg-20kg"
+                        defaultValue={kg20?.price}
+                        onChange={(e) => {
+                          setKg20({
+                            value: "10kg-20kg",
+                            price: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                    <div className="d-flex flex-column col-lg-3 col-md-3">
+                      <label htmlFor="Trên 20kg">Trên 20kg</label>
+                      <input
+                        className="form-control"
+                        type="number"
+                        name="Trên 20kg"
+                        defaultValue={kg40?.price}
+                        onChange={(e) => {
+                          setKg40({
+                            value: "Trên 20kg",
+                            price: e.target.value,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button
@@ -252,12 +396,16 @@ const ServiceManage = () => {
                   class="btn btn-secondary"
                   onClick={() => {
                     setIsShow((isShow) => !isShow);
-                    setImg(null);
+                    reset();
                   }}
                 >
                   Đóng
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  onClick={handleSubmit}
+                >
                   Xác nhận
                 </button>
               </div>
