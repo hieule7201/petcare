@@ -14,15 +14,15 @@ const editStatus = async (id, status) => {
 };
 const updateOrder = async (
   id,
-  { hair, weight, time_come, date_come, date_end, deliver }
+  { hair, time_come, date_come, date_end, deliver, price }
 ) => {
   return await instance.put(`/update-order/${id}`, {
     hair,
-    weight,
     time_come,
     date_come,
     date_end,
     deliver,
+    price,
   });
 };
 const addOrder = async ({

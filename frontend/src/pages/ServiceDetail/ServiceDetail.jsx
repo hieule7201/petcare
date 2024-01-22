@@ -49,6 +49,7 @@ const ServiceDetail = () => {
       currency: "VND",
     });
   };
+
   useEffect(() => {
     getDate();
   }, []);

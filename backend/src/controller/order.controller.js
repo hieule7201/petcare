@@ -93,7 +93,8 @@ const addOder = async (req, res, next) => {
 };
 const updateOrder = async (req, res, next) => {
   const id = req.params.id;
-  const { hair, weight, time_come, date_come, date_end, deliver } = req.body;
+  const { hair, weight, time_come, date_come, date_end, deliver, price } =
+    req.body;
   const [day, month, year] = date_come?.split("/");
   let newDate;
   if (date_end) {
@@ -105,11 +106,12 @@ const updateOrder = async (req, res, next) => {
   try {
     const order = await orderService.updateOrder(id, {
       hair,
-      weight,
       time_come,
       date_come: new Date(year, month - 1, day),
       date_end: newDate,
       deliver,
+      price,
+      status: "Đã xác nhận",
     });
     res.status(httpStatus.OK).json({
       message: "Successfully",

@@ -57,7 +57,7 @@ const OrderDetail = () => {
       console.log(error.data.response.message);
     }
   };
-  console.log(data);
+
   const handleOrder = async () => {
     Swal.fire({
       title: "Bạn có chắc chắn ?",

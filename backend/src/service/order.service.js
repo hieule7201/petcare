@@ -2,10 +2,7 @@ import orderModel from "../model/order.model.js";
 import customerService from "./customer.service.js";
 
 const getAllOrders = async () => {
-  return await orderModel
-    .find()
-    .populate("services", "name")
-    .populate("customer");
+  return await orderModel.find().populate("services").populate("customer");
 };
 const getOrderById = async (id) => {
   return await orderModel
@@ -53,15 +50,16 @@ const editStatus = async (id, status) => {
 };
 const updateOrder = async (
   id,
-  { hair, weight, time_come, date_come, date_end, deliver }
+  { hair, weight, time_come, date_come, date_end, deliver, price, status }
 ) => {
   return await orderModel.findByIdAndUpdate(id, {
     hair,
-    weight,
     time_come,
     date_come,
     date_end,
     deliver,
+    price,
+    status,
   });
 };
 

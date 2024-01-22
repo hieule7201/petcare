@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import userRoute from "./routes/user.route.js";
 import dateRouter from "./routes/date.route.js";
+import invoiceRouter from "./routes/invoice.route.js";
 import customerRouter from "./routes/customer.route.js";
 import orderRouter from "./routes/order.route.js";
 import serviceRouter from "./routes/service.route.js";
@@ -24,6 +25,7 @@ app.use(
 app.use(express.static("uploads"));
 
 app.use("/", userRoute);
+app.use("/", invoiceRouter);
 app.use("/", serviceRouter);
 app.use("/", timeRouter);
 app.use("/", dateRouter);

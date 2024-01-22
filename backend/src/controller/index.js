@@ -4,6 +4,7 @@ import timeController from "./time.controller.js";
 import dateController from "./date.controller.js";
 import customerController from "./customer.controller.js";
 import orderController from "./order.controller.js";
+import invoiceController from "./invoice.controller.js";
 export {
   userController,
   serviceController,
@@ -11,4 +12,5 @@ export {
   dateController,
   customerController,
   orderController,
+  invoiceController,
 };
