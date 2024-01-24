@@ -12,6 +12,41 @@ const getAllOrders = async (req, res, next) => {
     next(error);
   }
 };
+const groupByService = async (req, res, next) => {
+  try {
+    const orders = await orderService.groupByService();
+    res.status(httpStatus.OK).json({
+      message: "Successfully",
+      data: orders,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+const dayPriceInMonth = async (req, res, next) => {
+  const dayStart = req.params.dayStart;
+  const dayEnd = req.params.dayEnd;
+  try {
+    const orders = await orderService.dayPriceInMonth(dayStart, dayEnd);
+    res.status(httpStatus.OK).json({
+      message: "Successfully",
+      data: orders,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+const groupByCustomer = async (req, res, next) => {
+  try {
+    const orders = await orderService.groupByCustomer();
+    res.status(httpStatus.OK).json({
+      message: "Successfully",
+      data: orders,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 const getOrderById = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -127,4 +162,7 @@ export default {
   editStatus,
   addOder,
   updateOrder,
+  groupByService,
+  groupByCustomer,
+  dayPriceInMonth,
 };

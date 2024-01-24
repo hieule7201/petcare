@@ -62,6 +62,54 @@ const updateOrder = async (
     status,
   });
 };
+const groupByService = async () => {
+  return await orderModel.aggregate([
+    { $match: { status: "Đã hoàn thành" } },
+    { $group: { _id: "$services", price: { $sum: "$price" } } },
+    { $project: { _id: { $toObjectId: "$_id" }, price: "$price" } },
+    {
+      $lookup: {
+        from: "services",
+        localField: "_id",
+        foreignField: "_id",
+        as: "service",
+        pipeline: [{ $project: { name: "$name" } }],
+      },
+    },
+  ]);
+};
+const groupByCustomer = async () => {
+  return await orderModel.aggregate([
+    { $match: { status: "Đã hoàn thành" } },
+    { $group: { _id: "$customer", price: { $sum: "$price" } } },
+    { $project: { _id: { $toObjectId: "$_id" }, price: "$price" } },
+    {
+      $lookup: {
+        from: "customers",
+        localField: "_id",
+        foreignField: "_id",
+        as: "cus",
+        pipeline: [{ $project: { name: "$name" } }],
+      },
+    },
+    { $sort: { price: -1 } },
+    { $limit: 5 },
+  ]);
+};
+const dayPriceInMonth = async (dayStart, dayEnd) => {
+  return await orderModel.aggregate([
+    {
+      $match: {
+        status: "Đã hoàn thành",
+        date_come: {
+          $gte: new Date(dayStart),
+          $lte: new Date(dayEnd),
+        },
+      },
+    },
+    { $group: { _id: "$date_come", price: { $sum: "$price" } } },
+  ]);
+};
 
 export default {
   addOder,
@@ -70,4 +118,7 @@ export default {
   getAllOrders,
   getOderByCustomer,
   getOrderById,
+  groupByService,
+  groupByCustomer,
+  dayPriceInMonth,
 };

@@ -47,6 +47,11 @@ const DashboardSlide = ({ active }) => {
             Quản lý hóa đơn
           </Link>
         </div>
+        <div className={`d_service ${active === 9 ? "active" : ""}`}>
+          <Link to="/shop/statistical" className="d_link">
+            Thống kê
+          </Link>
+        </div>
         <div className="d_service" onClick={handleSignOut}>
           <p className="d_link">Đăng xuất</p>
         </div>

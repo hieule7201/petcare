@@ -127,7 +127,7 @@ const OrderDetail = () => {
   return (
     <>
       <DashboardHeader />
-      <div className="mx-5 shop_container">
+      <div className="mx-5  shop_container">
         <DashboardSlide active={1} />
         <div className="order-detail-container">
           <div className="staff-order-detail">

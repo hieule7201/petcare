@@ -21,6 +21,7 @@ import CreateDate from "./pages/Shop/CreateDate";
 import DateTimeManage from "./pages/Shop/DateTimeManage";
 import ServiceManage from "./pages/Shop/ServiceManage";
 import InvoiceManage from "./pages/Shop/InvoiceManage";
+import Statistical from "./pages/Shop/Statistical";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const App = () => {
         <Route path="/shop/date_time" element={<DateTimeManage />} />
         <Route path="/shop/service_manage" element={<ServiceManage />} />
         <Route path="/shop/invoice_manage" element={<InvoiceManage />} />
+        <Route path="/shop/statistical" element={<Statistical />} />
 
         <Route path="/shop/staff_setting" element={<StaffSetting />} />
 

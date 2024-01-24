@@ -74,7 +74,6 @@ const DateTimeManage = () => {
 
   const handleCheck = (e) => {
     let isChecked = e.target.checked;
-    console.log(isChecked);
     if (isChecked) setDate((date) => [...date, e.target.value]);
     else setDate(date.filter((a) => a !== e.target.value));
   };
@@ -323,7 +322,7 @@ const DateTimeManage = () => {
                       format="DD/MM/YYYY"
                       defaultValue={dayjs(reDate)}
                       onChange={(value) => {
-                        setReDate(formatDate(value));
+                        setReDate(value);
                       }}
                     />
                   </LocalizationProvider>

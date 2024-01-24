@@ -5,6 +5,11 @@ const router = express.Router();
 
 router
   .get("/get-all-orders", orderController.getAllOrders)
+  .get("/get-all-orders", orderController.getAllOrders)
+  .get("/group-by-service", orderController.groupByService)
+  .get("/group-by-customer", orderController.groupByCustomer)
+  .get("/day-price-in-month/:dayStart/:dayEnd", orderController.dayPriceInMonth)
+
   .get("/get-order-by-id/:id", orderController.getOrderById)
   .get("/get-order-by-customer/:customer", orderController.getOrderByCustomer)
   .put("/edit-status/:id", orderController.editStatus)
