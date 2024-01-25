@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
+import { MdEditSquare } from "react-icons/md";
+import { FaRegTrashAlt, FaPlusCircle } from "react-icons/fa";
 import {
   Paper,
   Table,
@@ -178,7 +180,7 @@ const ServiceManage = () => {
                 style={{ background: "var(--color-primary)" }}
                 onClick={() => setIsShow(true)}
               >
-                Tạo mới
+                <FaPlusCircle />
               </button>
             </div>
             <Paper sx={{ width: "100%", marginLeft: "1.25rem" }}>
@@ -243,13 +245,13 @@ const ServiceManage = () => {
                                   setFile(item.img);
                                 }}
                               >
-                                Chỉnh sửa
+                                <MdEditSquare />
                               </button>
                               <button
                                 className="btn btn-danger ml-3"
                                 onClick={() => handleDelete(item._id)}
                               >
-                                Xoá
+                                <FaRegTrashAlt />
                               </button>
                             </TableCell>
                           </TableRow>

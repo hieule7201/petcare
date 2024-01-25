@@ -20,17 +20,12 @@ const addInvoice = async (req, res, next) => {
     discount,
     time_charge,
     amount_charge,
-    change,
   } = req.body;
   try {
     const data = await invoiceService.addInvoice({
       order,
       status,
       invoice_amount,
-      discount,
-      time_charge,
-      amount_charge,
-      change,
     });
     res.status(HttpStatus.OK).json({
       message: "Successfully",
@@ -43,24 +38,13 @@ const addInvoice = async (req, res, next) => {
 
 const updateInvoice = async (req, res, next) => {
   const id = req.params.id;
-  const {
-    oder,
-    status,
-    invoice_amount,
-    discount,
-    time_charge,
-    amount_charge,
-    change,
-  } = req.body;
+  const { discount, amount_charge } = req.body;
   try {
     const data = await invoiceService.updateInvoice(id, {
-      oder,
-      status,
-      invoice_amount,
+      status: "Đã thanh toán",
       discount,
-      time_charge,
+      time_charge: new Date(),
       amount_charge,
-      change,
     });
     res.status(HttpStatus.OK).json({
       message: "Successfully",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
 import { getAllOrders, editStatus, updateOrder } from "../../api/order.js";
+import { IoEyeSharp } from "react-icons/io5";
 
 import {
   FormControl,
@@ -331,6 +332,7 @@ const OrderInfo = () => {
                   </TableHead>
                   <TableBody>
                     {order
+
                       .filter(
                         (value) =>
                           value.customer?.name
@@ -339,6 +341,9 @@ const OrderInfo = () => {
                       )
                       .filter(
                         (value) => value.status.indexOf(searchStatus) !== -1
+                      )
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                       )
                       .slice(page * rowPage, page * rowPage + rowPage)
                       .map((item, index) => {
@@ -416,7 +421,7 @@ const OrderInfo = () => {
                                     setEditOrder(item);
                                   }}
                                 >
-                                  Chi tiết
+                                  <IoEyeSharp />
                                 </button>
                               )}
                             </TableCell>

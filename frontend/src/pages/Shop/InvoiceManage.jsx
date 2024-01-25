@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
+import { MdOutlinePayment } from "react-icons/md";
+import { IoEyeSharp } from "react-icons/io5";
+import { useReactToPrint } from "react-to-print";
 import {
   Paper,
   Table,
@@ -12,9 +15,7 @@ import {
   TableRow,
 } from "@mui/material";
 import Swal from "sweetalert2";
-import { getAllInvoices } from "../../api/invoice";
-import { find_service_by_id } from "../../api/service";
-import { getCusById } from "../../api/customer";
+import { getAllInvoices, updateInvoice } from "../../api/invoice";
 
 const InvoiceManage = () => {
   useEffect(() => {
@@ -24,19 +25,22 @@ const InvoiceManage = () => {
     { id: "stt", name: "STT" },
     { id: "order", name: "Mã Đặt DV" },
     { id: "status", name: "Trạng thái" },
+    { id: "name", name: "Tên khách hàng" },
+    { id: "service", name: "Tên dịch vụ" },
     { id: "invoice_amount", name: "Tổng tiền" },
     { id: "discount", name: "Giảm giá" },
     { id: "time_charge", name: "Ngày thanh toán" },
-    { id: "amount_charge", name: "Tiền nhận" },
-    { id: "change", name: "Tiền thừa" },
+    { id: "amount_charge", name: "Thanh toán" },
     { id: "action", name: "Thao tác" },
   ];
+  const printRef = useRef();
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(0);
   const [isShow, setIsShow] = useState(false);
   const [isPrint, setIsPrint] = useState(false);
+  const [isDetail, setIsDetail] = useState(false);
   const [invoice, setInvoice] = useState([]);
   const [editInvoice, setEditInvoice] = useState({});
-  const [customer, setCustomer] = useState({});
-  const [service, setService] = useState({});
   const [page, pageChange] = useState(0);
   const [rowPage, rowPageChange] = useState(5);
   const handlePageChange = (event, newPage) => {
@@ -58,30 +62,6 @@ const InvoiceManage = () => {
       });
     }
   };
-  const getService = async (id) => {
-    try {
-      const response = await find_service_by_id(id);
-      setService(response.data.data);
-    } catch (error) {
-      Swal.fire({
-        title: error.message,
-        icon: "error",
-        timer: 3000,
-      });
-    }
-  };
-  const getCustomer = async (id) => {
-    try {
-      const response = await getCusById(id);
-      setCustomer(response.data.data);
-    } catch (error) {
-      Swal.fire({
-        title: error.message,
-        icon: "error",
-        timer: 3000,
-      });
-    }
-  };
   const formatMoney = (money) => {
     if (isNaN(money)) {
       console.error("Invalid input. Please provide a valid number.");
@@ -94,8 +74,43 @@ const InvoiceManage = () => {
       currency: "VND",
     });
   };
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  });
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString("en-GB");
+  };
+  console.log(discount, total);
+  const payment = async () => {
+    Swal.fire({
+      title: "Bạn có chắc chắn ?",
+      showCancelButton: true,
+      confirmButtonText: "Đúng",
+      cancelButtonText: "Không",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await updateInvoice(editInvoice._id, {
+            discount,
+            amount_charge: total,
+          });
+          getAll();
+          setIsShow(false);
+          setDiscount(0);
+          Swal.fire({
+            title: response.data.message,
+            icon: "success",
+            timer: 4000,
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Có lỗi xảy ra",
+            icon: "error",
+            timer: 4000,
+          });
+        }
+      }
+    });
   };
   return (
     <>
@@ -130,26 +145,37 @@ const InvoiceManage = () => {
                   </TableHead>
                   <TableBody>
                     {invoice
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      )
                       .slice(page * rowPage, page * rowPage + rowPage)
+
                       .map((item, index) => {
                         return (
                           <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>{item.order?._id}</TableCell>
                             <TableCell>{item.status}</TableCell>
+                            <TableCell>{item.order?.customer?.name}</TableCell>
+                            <TableCell>{item.order?.services?.name}</TableCell>
                             <TableCell>
                               {formatMoney(item.invoice_amount)}
                             </TableCell>
-                            <TableCell>{formatMoney(item?.discount)}</TableCell>
+                            <TableCell>
+                              {item.discount || item.discount === 0
+                                ? formatMoney(item.discount)
+                                : ""}
+                            </TableCell>
                             <TableCell>
                               {item.time_charge
                                 ? formatDate(item?.time_charge)
                                 : ""}
                             </TableCell>
                             <TableCell>
-                              {formatMoney(item?.amount_charge)}
+                              {item?.amount_charge
+                                ? formatMoney(item?.amount_charge)
+                                : ""}
                             </TableCell>
-                            <TableCell>{formatMoney(item?.change)}</TableCell>
                             <TableCell>
                               {item.status === "Chưa thanh toán" ? (
                                 <button
@@ -157,15 +183,20 @@ const InvoiceManage = () => {
                                   onClick={() => {
                                     setIsShow(true);
                                     setEditInvoice(item);
-                                    getCustomer(item.order.customer);
-                                    getService(item.order.services);
+                                    setTotal(item.invoice_amount);
                                   }}
                                 >
-                                  Thanh toán
+                                  <MdOutlinePayment />
                                 </button>
                               ) : (
-                                <button className="btn btn-primary">
-                                  Chi tiết
+                                <button
+                                  className="btn btn-secondary"
+                                  onClick={() => {
+                                    setIsDetail(true);
+                                    setEditInvoice(item);
+                                  }}
+                                >
+                                  <IoEyeSharp />
                                 </button>
                               )}
                             </TableCell>
@@ -203,6 +234,7 @@ const InvoiceManage = () => {
                   className="is-close"
                   onClick={() => {
                     setIsShow((isShow) => !isShow);
+                    setDiscount(0);
                   }}
                 >
                   &times;
@@ -212,13 +244,17 @@ const InvoiceManage = () => {
                 <div className="row">
                   <div className="col-lg-2 col-md-2 my-3">
                     <label htmlFor="name">Tên khách hàng</label>
-                    <p className="font-weight-bold">{customer.name}</p>
+                    <p className="font-weight-bold">
+                      {editInvoice.order?.customer?.name}
+                    </p>
                   </div>
                   <div className="col-lg-4 col-md-4 my-3">
                     <div className="row">
                       <div className="col-lg-8 col-md-8">
                         <label htmlFor="name">Tên Dịch vụ</label>
-                        <p className="font-weight-bold">{service.name}</p>
+                        <p className="font-weight-bold">
+                          {editInvoice.order?.services?.name}
+                        </p>
                       </div>
                       <div className="col-lg-4 col-md-4">
                         <label htmlFor="name">Giá</label>
@@ -230,19 +266,23 @@ const InvoiceManage = () => {
                   </div>
                   <div className="col-lg-3 col-md-3 my-3">
                     <label htmlFor="name">Giảm giá</label>
-                    <input type="text" className="form-control" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={(e) => {
+                        setDiscount(Number.parseInt(e.target.value));
+                        if (e.target.value) {
+                          setTotal(
+                            editInvoice.invoice_amount -
+                              Number.parseInt(e.target.value)
+                          );
+                        } else setTotal(editInvoice.invoice_amount);
+                      }}
+                    />
                   </div>
                   <div className="col-lg-3 col-md-3 my-3">
                     <label htmlFor="name">Tổng tiền</label>
-                    <p className="font-weight-bold"></p>
-                  </div>
-                  <div className="col-lg-3 col-md-3 my-3">
-                    <label htmlFor="name">Tiền nhận</label>
-                    <input type="text" className="form-control" />
-                  </div>
-                  <div className="col-lg-3 col-md-3 my-3">
-                    <label htmlFor="name">Tiền dư</label>
-                    <p className="font-weight-bold">{editInvoice?.change}</p>
+                    <p className="font-weight-bold">{total}</p>
                   </div>
                 </div>
               </div>
@@ -252,6 +292,7 @@ const InvoiceManage = () => {
                   className="btn btn-secondary"
                   onClick={() => {
                     setIsShow((isShow) => !isShow);
+                    setDiscount(0);
                   }}
                 >
                   Đóng
@@ -263,7 +304,11 @@ const InvoiceManage = () => {
                 >
                   Tạm in
                 </button>
-                <button type="submit" className="btn btn-success">
+                <button
+                  type="submit"
+                  className="btn btn-success"
+                  onClick={payment}
+                >
                   Thanh toán
                 </button>
               </div>
@@ -272,6 +317,7 @@ const InvoiceManage = () => {
         ) : (
           ""
         )}
+
         {isPrint ? (
           <div className="print-modal">
             <div className="modal-content w-50">
@@ -286,16 +332,20 @@ const InvoiceManage = () => {
                   &times;
                 </span>
               </div>
-              <div className="modal-body">
+              <div ref={printRef} className="modal-body">
                 <div className="text-center">
                   <label htmlFor="name">Tên khách hàng</label>
-                  <p className="font-weight-bold">{customer.name}</p>
+                  <p className="font-weight-bold">
+                    {editInvoice.order?.customer?.name}
+                  </p>
                 </div>
                 <div className="w-100 border-bottom"></div>
                 <div className="row py-5">
                   <div className="col-lg-8 col-md-8">
                     <label htmlFor="name">Tên Dịch vụ</label>
-                    <p className="font-weight-bold">{service.name}</p>
+                    <p className="font-weight-bold">
+                      {editInvoice.order?.services?.name}
+                    </p>
                   </div>
                   <div className="col-lg-4 col-md-4 d-flex flex-column align-items-end">
                     <label htmlFor="name">Giá</label>
@@ -308,14 +358,14 @@ const InvoiceManage = () => {
                 <div className="d-flex flex-column align-items-end">
                   <div className="d-flex flex-column align-items-end ">
                     <label htmlFor="name">Giảm giá</label>
-                    <p className="font-weight-bold"> %</p>
+                    <p className="font-weight-bold">
+                      {" "}
+                      {discount ? formatMoney(discount) : formatMoney(0)}
+                    </p>
                   </div>
                   <div className="d-flex flex-column align-items-end">
                     <label htmlFor="name">Tổng tiền</label>
-                    <p className="font-weight-bold">
-                      {" "}
-                      {formatMoney(editInvoice.invoice_amount)}
-                    </p>
+                    <p className="font-weight-bold"> {formatMoney(total)}</p>
                   </div>
                 </div>
               </div>
@@ -329,8 +379,85 @@ const InvoiceManage = () => {
                 >
                   Đóng
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    handlePrint();
+                    setIsPrint(false);
+                  }}
+                >
                   In
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        {isDetail ? (
+          <div className="b-modal">
+            <div className="modal-content container">
+              <div className="modal-header">
+                <h4>Thông tin Hóa đơn</h4>
+                <span
+                  className="is-close"
+                  onClick={() => {
+                    setIsDetail((isDetail) => !isDetail);
+                    setDiscount(0);
+                  }}
+                >
+                  &times;
+                </span>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-lg-2 col-md-2 my-3">
+                    <label htmlFor="name">Tên khách hàng</label>
+                    <p className="font-weight-bold">
+                      {editInvoice.order?.customer?.name}
+                    </p>
+                  </div>
+                  <div className="col-lg-4 col-md-4 my-3">
+                    <div className="row">
+                      <div className="col-lg-8 col-md-8">
+                        <label htmlFor="name">Tên Dịch vụ</label>
+                        <p className="font-weight-bold">
+                          {editInvoice.order?.services?.name}
+                        </p>
+                      </div>
+                      <div className="col-lg-4 col-md-4">
+                        <label htmlFor="name">Giá</label>
+                        <p className="font-weight-bold">
+                          {formatMoney(editInvoice.invoice_amount)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 col-md-3 my-3">
+                    <label htmlFor="name">Giảm giá</label>
+                    <p className="font-weight-bold">
+                      {formatMoney(editInvoice.discount)}
+                    </p>
+                  </div>
+                  <div className="col-lg-3 col-md-3 my-3">
+                    <label htmlFor="name">Tổng tiền</label>
+                    <p className="font-weight-bold">
+                      {formatMoney(editInvoice.amount_charge)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    setIsDetail((isDetail) => !isDetail);
+                    setDiscount(0);
+                  }}
+                >
+                  Đóng
                 </button>
               </div>
             </div>

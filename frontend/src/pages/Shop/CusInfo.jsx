@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
+import { MdEditSquare } from "react-icons/md";
+
 import {
   Paper,
   Table,
@@ -139,7 +141,7 @@ const CusInfo = () => {
                                   setEditCus(item);
                                 }}
                               >
-                                Chỉnh sửa
+                                <MdEditSquare />
                               </button>
                             </TableCell>
                           </TableRow>

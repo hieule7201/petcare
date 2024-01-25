@@ -3,6 +3,8 @@ import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
+import { MdEditSquare } from "react-icons/md";
+import { FaRegTrashAlt } from "react-icons/fa";
 import {
   Table,
   Paper,
@@ -256,13 +258,13 @@ const DateTimeManage = () => {
                                 getIdTime(item.times);
                               }}
                             >
-                              Chỉnh sửa
+                              <MdEditSquare />
                             </button>
                             <button
                               className="btn btn-danger ml-3"
                               onClick={() => handleDelete(item._id)}
                             >
-                              Xoá
+                              <FaRegTrashAlt />
                             </button>
                           </TableCell>
                         </TableRow>

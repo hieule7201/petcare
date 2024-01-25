@@ -5,7 +5,7 @@ import Long from "../../components/ServiceDetail/Long";
 import Time from "../../components/ServiceDetail/Time";
 import FormBooking from "../../components/ServiceDetail/FormBooking";
 import DashboardSlide from "../../components/Shop/Template/DashboardSlide";
-import PrimaryButton from "../../UI/PrimaryButton";
+
 import DashboardHeader from "../../components/Shop/Template/DashboardHeader";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

@@ -29,17 +29,7 @@ const App = () => {
     // loadUser();
     dispatch(getAllService());
   });
-  const loadUser = async () => {
-    try {
-      dispatch(loginStart());
-      const res = await get_user();
-      dispatch(loginSuccess(res.data));
-      // console.log(res.data);
-    } catch (error) {
-      // dispatch(loginFail());
-      console.log(error.response?.data.message);
-    }
-  };
+
   return (
     <BrowserRouter>
       <Routes>

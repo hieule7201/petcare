@@ -20,11 +20,9 @@ const Services = () => {
                 });
               }}
               className="col-lg-6 col-md-6 col p-0 bg-white "
+              key={_id}
             >
-              <div
-                className="card bg-dark text-white border-0 m-3 h-100"
-                key={_id}
-              >
+              <div className="card bg-dark text-white border-0 m-3 h-100">
                 <img
                   src={img ? URL_IMG + img : img_card_default}
                   alt=""
