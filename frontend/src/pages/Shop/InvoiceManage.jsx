@@ -282,7 +282,7 @@ const InvoiceManage = () => {
                   </div>
                   <div className="col-lg-3 col-md-3 my-3">
                     <label htmlFor="name">Tổng tiền</label>
-                    <p className="font-weight-bold">{total}</p>
+                    <p className="font-weight-bold">{formatMoney(total)}</p>
                   </div>
                 </div>
               </div>
@@ -359,7 +359,6 @@ const InvoiceManage = () => {
                   <div className="d-flex flex-column align-items-end ">
                     <label htmlFor="name">Giảm giá</label>
                     <p className="font-weight-bold">
-                      {" "}
                       {discount ? formatMoney(discount) : formatMoney(0)}
                     </p>
                   </div>

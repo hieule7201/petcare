@@ -112,11 +112,14 @@ const Statistical = () => {
   };
 
   const getDate = async (dayStart, dayEnd) => {
+    console.log(dayStart, dayEnd);
     try {
       const response6 = await dayPriceInMonth(dayStart, dayEnd);
       if (response6.data.data.length > 0) {
         setDataMonth({
-          labels: response6.data.data.map((item) => formatDate(item._id)),
+          labels: response6.data.data
+            .sort((a, b) => new Date(a._id) - new Date(b._id))
+            .map((item) => formatDate(item._id)),
           datasets: [
             {
               label: "Tổng tiền",
@@ -126,6 +129,7 @@ const Statistical = () => {
             },
           ],
         });
+        setIsShow(true);
       } else {
         setIsShow(false);
         Swal.fire({
@@ -307,7 +311,6 @@ const Statistical = () => {
                 className="form-control w-25 ml-2"
                 onChange={(e) => {
                   getDate(dayStart, e.target.value);
-                  setIsShow(true);
                 }}
               />
             </div>
